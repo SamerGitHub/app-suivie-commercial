@@ -1,10 +1,9 @@
 package com.example.demo.entities;
 
+import com.example.demo.entities.Engin.Engin;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSetter;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 
 @Entity
 

@@ -1,12 +1,12 @@
-package com.example.demo.entities;
+package com.example.demo.entities.Engin;
 
 
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.demo.entities.Localisation;
 
 import javax.persistence.*;
-import javax.validation.Constraint;
+import java.util.Collection;
 
 @Entity
 
@@ -20,17 +20,69 @@ public class Engin {
     private String modele;
     private String status;
 
-    //meme nom d'attribut ClassEngin clasEngin;
+    @OneToMany(mappedBy = "engin")
+    private Collection<Assurance> assurances;
+
+    @OneToMany(mappedBy = "engin")
+    private Collection<Reparation> reparations;
+
+    @OneToMany(mappedBy = "engin")
+    private Collection<Taxe> taxes;
+
+    @OneToMany(mappedBy = "engin")
+    private Collection<Vidange> vidanges;
+
+    @OneToMany(mappedBy = "engin")
+    private Collection<Visite> visites;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     private ClassEngin clasEngin;
-
-
 
     @OneToOne(fetch = FetchType.EAGER)
     //@JoinColumn(name = "localisation_id", nullable = false)
     private Localisation localisation;
 
+
+    public Collection<Assurance> getAssurances() {
+        return assurances;
+    }
+
+    public void setAssurances(Collection<Assurance> assurances) {
+        this.assurances = assurances;
+    }
+
+    public Collection<Reparation> getReparations() {
+        return reparations;
+    }
+
+    public void setReparations(Collection<Reparation> reparations) {
+        this.reparations = reparations;
+    }
+
+    public Collection<Taxe> getTaxes() {
+        return taxes;
+    }
+
+    public void setTaxes(Collection<Taxe> taxes) {
+        this.taxes = taxes;
+    }
+
+    public Collection<Vidange> getVidanges() {
+        return vidanges;
+    }
+
+    public void setVidanges(Collection<Vidange> vidanges) {
+        this.vidanges = vidanges;
+    }
+
+    public Collection<Visite> getVisites() {
+        return visites;
+    }
+
+    public void setVisites(Collection<Visite> visites) {
+        this.visites = visites;
+    }
 
     public Engin() {
 

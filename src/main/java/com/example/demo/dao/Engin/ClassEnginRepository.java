@@ -1,7 +1,6 @@
-package com.example.demo.dao;
+package com.example.demo.dao.Engin;
 
-import com.example.demo.entities.ClassEngin;
-import com.example.demo.entities.Engin;
+import com.example.demo.entities.Engin.ClassEngin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

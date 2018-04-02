@@ -1,7 +1,6 @@
-package com.example.demo.entities;
+package com.example.demo.entities.Engin;
 
 
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;

@@ -1,8 +1,7 @@
-package com.example.demo.service;
+package com.example.demo.service.Engin;
 
-import com.example.demo.dao.ClassEnginRepository;
-import com.example.demo.dao.LocalisationRepository;
-import com.example.demo.entities.ClassEngin;
+import com.example.demo.dao.Engin.ClassEnginRepository;
+import com.example.demo.entities.Engin.ClassEngin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

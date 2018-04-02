@@ -1,10 +1,12 @@
 package com.example.demo;
 
-import com.example.demo.dao.ClassEnginRepository;
-import com.example.demo.dao.EnginRepository;
+import com.example.demo.dao.Engin.ClassEnginRepository;
+import com.example.demo.dao.Engin.EnginRepository;
 import com.example.demo.dao.LocalisationRepository;
 import com.example.demo.dao.TaskRepository;
 import com.example.demo.entities.*;
+import com.example.demo.entities.Engin.ClassEngin;
+import com.example.demo.entities.Engin.Engin;
 import com.example.demo.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -15,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.stream.Stream;
 //firas
+
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
 

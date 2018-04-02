@@ -1,7 +1,7 @@
-package com.example.demo.web;
+package com.example.demo.web.Engin;
 
-import com.example.demo.entities.Engin;
-import com.example.demo.service.EnginService;
+import com.example.demo.entities.Engin.Engin;
+import com.example.demo.service.Engin.EnginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

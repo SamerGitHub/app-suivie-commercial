@@ -10,7 +10,7 @@ public class Chantier {
     @GeneratedValue
     private Long id;
     private String adresse;
-    @LastModifiedDate
+
     private String description;
 
     @OneToOne(fetch = FetchType.EAGER)
