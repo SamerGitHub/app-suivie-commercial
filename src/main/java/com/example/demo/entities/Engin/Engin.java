@@ -36,13 +36,22 @@ public class Engin {
     private Collection<Visite> visites;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private ClassEngin clasEngin;
 
     @OneToOne(fetch = FetchType.EAGER)
     //@JoinColumn(name = "localisation_id", nullable = false)
     private Localisation localisation;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    //@JoinColumn(name = "localisation_id", nullable = false)
+    private TypeEngin typeEngin;
+
+    public TypeEngin getTypeEngin() {
+        return typeEngin;
+    }
+
+    public void setTypeEngin(TypeEngin typeEngin) {
+        this.typeEngin = typeEngin;
+    }
 
     public Collection<Assurance> getAssurances() {
         return assurances;
@@ -105,13 +114,7 @@ public class Engin {
         this.localisation = localisation;
     }
 
-    public ClassEngin getClasEngin() {
-        return clasEngin;
-    }
 
-    public void setClasEngin(ClassEngin clasEngin) {
-        this.clasEngin = clasEngin;
-    }
 
     public Long getId() {
         return id;

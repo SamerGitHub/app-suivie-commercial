@@ -11,7 +11,7 @@ public class Localisation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String latitude, longitude;
+    private Float latitude, longitude;
 
 
     @OneToOne(fetch = FetchType.EAGER,
@@ -25,7 +25,7 @@ public class Localisation {
             mappedBy = "localisation")
     private Chantier chantier;
 
-    public Localisation(String latitude, String longitude) {
+    public Localisation(Float latitude, Float longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -41,19 +41,19 @@ public class Localisation {
         this.id = id;
     }
 
-    public String getLatitude() {
+    public Float getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Float latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public Float getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Float longitude) {
         this.longitude = longitude;
     }
 

@@ -12,20 +12,31 @@ public class ClassEngin {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String classificaton;
-    private String type;
 
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "clasEngin")
+    private Collection<TypeEngin> typeEngins;
+/*
     @OneToMany(mappedBy = "clasEngin")
     private Collection<Engin> engins;
+*/
 
-
-    public ClassEngin(String classificaton, String type) {
+    public ClassEngin(String classificaton) {
         this.classificaton = classificaton;
-        this.type = type;
+
     }
 
     public ClassEngin() {
 
+    }
+
+    public Collection<TypeEngin> getTypeEngins() {
+        return typeEngins;
+    }
+
+    public void setTypeEngins(Collection<TypeEngin> typeEngins) {
+        this.typeEngins = typeEngins;
     }
 
     public Long getId() {
@@ -44,15 +55,9 @@ public class ClassEngin {
         this.classificaton = classificaton;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
 
+/*
     @JsonIgnore
     public Collection<Engin> getEngins() {
         return engins;
@@ -62,5 +67,5 @@ public class ClassEngin {
         this.engins = engins;
     }
 
-
+*/
 }

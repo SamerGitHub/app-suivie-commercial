@@ -33,8 +33,10 @@ public class EnginService {
     }
 
     public void addEngin(Engin engin) {
+        engin.setLocalisation(localisationRepository.save(new Localisation(0f, 0f)));
+        enginRepository.save(engin);
 
-
+/*
         if(engin.getClasEngin()==null)throw new RuntimeException("ClassEngin Not found in body");
         if (engin.getClasEngin().getType() == null)
             throw new RuntimeException("Type ClassEngin Not found in body");
@@ -46,19 +48,19 @@ public class EnginService {
 
 
         if (ce != null) {
-            engin.setLocalisation(localisationRepository.save(new Localisation("0x", "0y")));
+            engin.setLocalisation(localisationRepository.save(new Localisation(0f, 0f)));
             engin.setClasEngin(ce);
             enginRepository.save(engin);
         } else {
             throw new RuntimeException("Classification Not Exist in DB");
 
         }
-
+*/
 
     }
 
     public void updateEngin(Engin engin) {
-
+/*
         Engin e=enginRepository.getEnginById(engin.getId());
         if(e!=null)
         {
@@ -77,7 +79,7 @@ public class EnginService {
         }else
             throw new RuntimeException("Engin not found");
 
-
+*/
     }
 
     public void deleteEngin(Long id){
@@ -92,4 +94,5 @@ public class EnginService {
           }else throw new RuntimeException("Engin not exist");
 
     }
+
 }
