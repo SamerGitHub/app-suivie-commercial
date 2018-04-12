@@ -11,7 +11,7 @@ public class ClassEngin {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String classificaton;
+    private String classification;
 
 
     @JsonIgnore
@@ -22,8 +22,8 @@ public class ClassEngin {
     private Collection<Engin> engins;
 */
 
-    public ClassEngin(String classificaton) {
-        this.classificaton = classificaton;
+    public ClassEngin(String classification) {
+        this.classification = classification;
 
     }
 
@@ -47,12 +47,12 @@ public class ClassEngin {
         this.id = id;
     }
 
-    public String getClassificaton() {
-        return classificaton;
+    public String getClassification() {
+        return classification;
     }
 
-    public void setClassificaton(String classificaton) {
-        this.classificaton = classificaton;
+    public void setClassification(String classificaton) {
+        this.classification = classificaton;
     }
 
 

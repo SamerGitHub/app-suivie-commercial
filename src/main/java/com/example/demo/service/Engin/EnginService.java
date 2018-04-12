@@ -1,6 +1,7 @@
 package com.example.demo.service.Engin;
 
 
+import com.example.demo.Exception.EnginNotFoundException;
 import com.example.demo.dao.Engin.ClassEnginRepository;
 import com.example.demo.dao.Engin.EnginRepository;
 import com.example.demo.dao.LocalisationRepository;
@@ -9,6 +10,7 @@ import com.example.demo.entities.Engin.Engin;
 import com.example.demo.entities.Localisation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ServerErrorException;
 
 import java.util.List;
 
@@ -22,6 +24,10 @@ public class EnginService {
     private ClassEnginRepository classEnginRepository;
 
 
+    public Engin getEnginByMatricule(String matricule) {
+        return enginRepository.getEnginByMatricule(matricule);
+    }
+
     public List<Engin> getAllEngin() {
 
         return enginRepository.findAll();
@@ -33,6 +39,12 @@ public class EnginService {
     }
 
     public void addEngin(Engin engin) {
+Engin e=enginRepository.getEnginByMatricule(engin.getMatricule());
+if(e!=null){
+    throw  new ServerErrorException("engin exite deja");
+
+}
+System.out.println("after exep");
         engin.setLocalisation(localisationRepository.save(new Localisation(0f, 0f)));
         enginRepository.save(engin);
 
@@ -60,6 +72,25 @@ public class EnginService {
     }
 
     public void updateEngin(Engin engin) {
+        Engin e=enginRepository.getEnginById(engin.getId());
+        if(e!=null)
+        {
+            if(engin.getTypeEngin()==null)
+
+                throw new RuntimeException("typeEngin Not found in body");
+
+
+                if (engin.getTypeEngin().getId() == null)
+                    throw new RuntimeException("typeEngin.id Not found in body");
+
+            engin.setLocalisation(e.getLocalisation());
+            enginRepository.save(engin);
+
+        }
+        else
+        {
+            throw new RuntimeException("engin id Not found in BD");
+        }
 /*
         Engin e=enginRepository.getEnginById(engin.getId());
         if(e!=null)

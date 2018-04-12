@@ -1,14 +1,10 @@
 package com.example.demo;
 
-import com.example.demo.dao.Engin.ClassEnginRepository;
-import com.example.demo.dao.Engin.EnginRepository;
-import com.example.demo.dao.Engin.TypeEnginRepository;
+import com.example.demo.dao.Engin.*;
 import com.example.demo.dao.LocalisationRepository;
 import com.example.demo.dao.TaskRepository;
 import com.example.demo.entities.*;
-import com.example.demo.entities.Engin.ClassEngin;
-import com.example.demo.entities.Engin.Engin;
-import com.example.demo.entities.Engin.TypeEngin;
+import com.example.demo.entities.Engin.*;
 import com.example.demo.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -17,12 +13,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.Date;
 import java.util.stream.Stream;
 //firas
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
-
+    @Autowired
+    private AssuranceRepository assuranceRepository;
+    @Autowired
+    private VisiteRepository visiteRepository;
+    @Autowired
+    private TaxeRepository taxeRepository;
     @Autowired
     private TypeEnginRepository typeEnginRepository;
     @Autowired
@@ -76,7 +78,7 @@ public class DemoApplication implements CommandLineRunner {
         te1.setClasEngin(ce1);
         te2.setClasEngin(ce1);
         te3.setClasEngin(ce1);
-        typeEnginRepository.save(te1);typeEnginRepository.save(te2);typeEnginRepository.save(te2);
+        typeEnginRepository.save(te1);typeEnginRepository.save(te2);typeEnginRepository.save(te3);
 
 
         TypeEngin te4=new TypeEngin("chargeuses sur pneus");TypeEngin te5=new TypeEngin("chargeuses sur chenilles");TypeEngin te6=new TypeEngin("chargeuse-pelleteuse");
@@ -108,7 +110,29 @@ public class DemoApplication implements CommandLineRunner {
 
         e1.setTypeEngin(te1);e2.setTypeEngin(te2);e3.setTypeEngin(te6);e4.setTypeEngin(te6);
         e1.setLocalisation(l);e2.setLocalisation(l2); e3.setLocalisation(l3);e4.setLocalisation(l4);
-        enginRepository.save(e1);enginRepository.save(e2); enginRepository.save(e3);enginRepository.save(e4);
+        e1=enginRepository.save(e1);e2=enginRepository.save(e2); e3=enginRepository.save(e3);e4=enginRepository.save(e4);
+
+        Visite v1=new Visite();v1.setEngin(e1);v1.setDateDeb(new Date(2018-1900,1-1,5));
+        v1.setDateFin(new Date(2018-1900,2-1,5));v1.setStatus("Accepter");v1.setPrix(100f);
+        visiteRepository.save(v1);
+
+        Visite v2=new Visite();v2.setEngin(e2);v2.setDateDeb(new Date(2018-1900,1-1,5));v2.setPrix(50f);
+        v2.setDateFin(new Date(2018-1900,1,5));v2.setStatus("Refuser");v2.setDescription("problème de feux avant");
+        visiteRepository.save(v2);
+
+        Taxe t1=new Taxe(new Date(2018-1900,1-1,6),new Date(2018-1900,2-1,6),450f);
+        t1.setEngin(e1);taxeRepository.save(t1);
+
+        Taxe t2=new Taxe(new Date(2018-1900,1-1,6),new Date(2018-1900,2-1,6),450f);
+        t2.setEngin(e2);taxeRepository.save(t2);
+
+
+        Assurance a1=new Assurance(new Date(2018-1900,1-1,6),new Date(2018-1900,2-1,6),450f);
+        a1.setEngin(e1);assuranceRepository.save(a1);
+
+        Assurance a2=new Assurance(new Date(2018-1900,1-1,6),new Date(2018-1900,2-1,6),450f);
+        a2.setEngin(e2);assuranceRepository.save(a2);
+
 
 
 
@@ -122,12 +146,6 @@ public class DemoApplication implements CommandLineRunner {
 
         System.out.println("main ::::  After delete localisation");
        */
-
-
-
-
-
-
 
 /*
         Engin e1 =new Engin("mat1","marq1","mod1","stat1");

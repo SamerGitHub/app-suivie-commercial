@@ -1,31 +1,26 @@
 package com.example.demo.entities.Engin;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-public class Taxe {
+public class Carburant {
     @Id
     @GeneratedValue
     private Long id;
-    @Temporal(TemporalType.DATE)
-    private Date dateDeb;
-    @Temporal(TemporalType.DATE)
-    private Date dateFin;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+    private Float km;
     private Float prix;
-    //@JsonIgnore
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Engin engin;
+    public Carburant() {
 
-    public Taxe(Date dateDeb, Date dateFin, Float prix) {
-        this.dateDeb = dateDeb;
-        this.dateFin = dateFin;
-        this.prix = prix;
     }
-
-    public Taxe() {
+    public Carburant(Date date, Float km, Float prix) {
+        this.date = date;
+        this.km = km;
+        this.prix = prix;
     }
 
     public Long getId() {
@@ -36,20 +31,20 @@ public class Taxe {
         this.id = id;
     }
 
-    public Date getDateDeb() {
-        return dateDeb;
+    public Date getDate() {
+        return date;
     }
 
-    public void setDateDeb(Date dateDeb) {
-        this.dateDeb = dateDeb;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public Date getDateFin() {
-        return dateFin;
+    public Float getKm() {
+        return km;
     }
 
-    public void setDateFin(Date dateFin) {
-        this.dateFin = dateFin;
+    public void setKm(Float km) {
+        this.km = km;
     }
 
     public Float getPrix() {

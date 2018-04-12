@@ -16,11 +16,17 @@ public class Assurance {
     private Date dateFin;
     private Float prix;
 
-    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Engin engin;
 
     public Assurance() {
+    }
+
+    public Assurance(Date dateDeb, Date dateFin, Float prix) {
+        this.dateDeb = dateDeb;
+        this.dateFin = dateFin;
+        this.prix = prix;
     }
 
     public Long getId() {

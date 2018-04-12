@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EnginRepository extends JpaRepository<Engin, Long> {
+    public Engin getEnginByMatricule(String mat);
     public Engin getEnginById(Long id);
 
 

@@ -1,6 +1,6 @@
 package com.example.demo.entities.Engin;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,15 +11,42 @@ public class Vidange {
     @Id
     @GeneratedValue
     private Long id;
+    private String type;
     private String huile ;
     @Temporal(TemporalType.DATE)
     private Date dateVidange;
     private Float prix;
-    @JsonIgnore
+    private String description;
+
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Engin engin;
 
     public Vidange() {
+    }
+
+    public Vidange(String type, String huile, Date dateVidange, Float prix, String description) {
+        this.type = type;
+        this.huile = huile;
+        this.dateVidange = dateVidange;
+        this.prix = prix;
+        this.description = description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Long getId() {

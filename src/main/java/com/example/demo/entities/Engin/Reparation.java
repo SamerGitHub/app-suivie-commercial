@@ -12,12 +12,20 @@ public class Reparation {
     @GeneratedValue
     private Long id;
     private String piece;
+    private String type;
     private String description;
     @Temporal(TemporalType.DATE)
     private Date dateReparation;
     private Float prix;
 
-    @JsonIgnore
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Engin engin;
 

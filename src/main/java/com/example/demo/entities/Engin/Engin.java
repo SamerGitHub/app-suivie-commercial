@@ -4,8 +4,10 @@ package com.example.demo.entities.Engin;
 
 
 import com.example.demo.entities.Localisation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 @Entity
@@ -14,27 +16,31 @@ public class Engin {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(unique = true)
+
+    @Column(unique = true,nullable = false)
     private String matricule;
     private String marque;
     private String modele;
     private String status;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "engin")
     private Collection<Assurance> assurances;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "engin")
     private Collection<Reparation> reparations;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "engin")
     private Collection<Taxe> taxes;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "engin")
     private Collection<Vidange> vidanges;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "engin")
     private Collection<Visite> visites;
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "engin")
+    private Collection<Carburant> carburants;
 
 
     @OneToOne(fetch = FetchType.EAGER)
@@ -91,6 +97,14 @@ public class Engin {
 
     public void setVisites(Collection<Visite> visites) {
         this.visites = visites;
+    }
+
+    public Collection<Carburant> getCarburants() {
+        return carburants;
+    }
+
+    public void setCarburants(Collection<Carburant> carburants) {
+        this.carburants = carburants;
     }
 
     public Engin() {

@@ -1,6 +1,7 @@
 package com.example.demo.entities.Engin;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -19,7 +20,18 @@ public class Visite {
     private String description;
     private Float prix;
 
-    @JsonIgnore
+@Temporal(TemporalType.TIMESTAMP)
+@CreatedDate
+private Date createdDate;
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Engin engin;
 

@@ -13,6 +13,17 @@ public class EnginRestController {
     @Autowired
     private EnginService enginService;
 
+
+
+    @GetMapping("/engin/matricule/{matricule}")
+    public Engin getEnginByMatricule(@PathVariable String matricule)
+    {
+
+        Engin e= enginService.getEnginByMatricule(matricule);
+
+        return e;
+    }
+
     @GetMapping("/engin")
     public List<Engin> getAllEngin()
     {
@@ -36,7 +47,7 @@ public class EnginRestController {
         enginService.addEngin(engin);
     }
 
-    @PutMapping("/engin/{id}")
+    @PutMapping("/engin")
     public void updateEngin(@RequestBody Engin engin)
     {
         enginService.updateEngin(engin);
