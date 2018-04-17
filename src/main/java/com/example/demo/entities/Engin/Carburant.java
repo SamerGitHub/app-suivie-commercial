@@ -3,6 +3,7 @@ package com.example.demo.entities.Engin;
 import javax.persistence.*;
 import java.util.Date;
 
+@Entity
 public class Carburant {
     @Id
     @GeneratedValue

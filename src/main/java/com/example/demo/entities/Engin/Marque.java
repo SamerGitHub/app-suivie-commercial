@@ -20,6 +20,10 @@ public class Marque {
     @OneToMany(mappedBy = "marque")
     private Collection<Modele> modeles;
 
+    public Marque(String nom, TypeEngin typeEngin) {
+        this.nom = nom;
+        this.typeEngin = typeEngin;
+    }
 
     public Marque() {
 

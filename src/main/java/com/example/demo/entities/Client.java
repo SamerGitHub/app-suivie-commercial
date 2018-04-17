@@ -9,15 +9,31 @@ public class Client {
     @Id
     @GeneratedValue
     private Long id;
-    private String nom,prenom,tel,adresse;
+    private String nom,prenom,tel,email,adresse;
 
     @OneToOne(fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL,
+            //cascade = CascadeType.ALL,
             mappedBy = "client")
     private Chantier chantier;
 
+    public Client(String nom, String prenom, String tel, String email, String adresse) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.tel = tel;
+        this.email = email;
+        this.adresse = adresse;
+    }
+
     public Client() {
 
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Client(String nom, String prenom, String tel, String adresse) {

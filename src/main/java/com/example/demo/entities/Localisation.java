@@ -21,7 +21,7 @@ public class Localisation {
     private Engin engin;
 
     @OneToOne(fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL,
+            //cascade = CascadeType.ALL,
             mappedBy = "localisation")
     private Chantier chantier;
 

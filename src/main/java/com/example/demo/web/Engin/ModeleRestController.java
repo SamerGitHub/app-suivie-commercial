@@ -13,8 +13,8 @@ public class ModeleRestController {
     @Autowired
     private ModeleService modeleService;
 
-    @GetMapping("/modele/typeEngin/{id}")
-    public List<Modele> getAllModeleByIdTypeEngin(@PathVariable Long id)
+    @GetMapping("/modele/marque/{id}")
+    public List<Modele> getAllModeleByIdMarque(@PathVariable Long id)
     {
 
         return modeleService.getAllModeleByidMarque(id);

@@ -26,7 +26,7 @@ public class ClientService {
 
     public void addClient(Client client) {
 
-
+        client.setId(null);
         clientRepository.save(client);
 
     }

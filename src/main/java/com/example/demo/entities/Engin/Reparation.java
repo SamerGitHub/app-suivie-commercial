@@ -3,6 +3,7 @@ package com.example.demo.entities.Engin;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -11,26 +12,43 @@ public class Reparation {
     @Id
     @GeneratedValue
     private Long id;
-    private String piece;
-    private String type;
-    private String description;
     @Temporal(TemporalType.DATE)
     private Date dateReparation;
     private Float prix;
+    private String description;
 
-    public String getType() {
-        return type;
-    }
 
-    public void setType(String type) {
-        this.type = type;
-    }
+    @OneToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.REMOVE,
+            //  cascade = CascadeType.REMOVE,orphanRemoval = true,
+            mappedBy = "reparation")
+    private Collection<LigneReparation> ligneReparations;
+
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Engin engin;
 
     public Reparation() {
+
     }
+
+    public Reparation(Date dateReparation, Float prix, String description, Engin engin) {
+        this.dateReparation = dateReparation;
+        this.prix = prix;
+        this.description = description;
+        this.engin = engin;
+    }
+
+
+    public Collection<LigneReparation> getLigneReparations() {
+        return ligneReparations;
+    }
+
+    public void setLigneReparations(Collection<LigneReparation> ligneReparations) {
+        this.ligneReparations = ligneReparations;
+    }
+
 
     public Long getId() {
         return id;
@@ -40,13 +58,7 @@ public class Reparation {
         this.id = id;
     }
 
-    public String getPiece() {
-        return piece;
-    }
 
-    public void setPiece(String piece) {
-        this.piece = piece;
-    }
 
     public String getDescription() {
         return description;

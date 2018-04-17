@@ -30,6 +30,11 @@ public class Modele {
 
     }
 
+    public Modele(String nom, Marque marque) {
+        this.nom = nom;
+        this.marque = marque;
+    }
+
     public Modele(String nom) {
         this.nom = nom;
     }

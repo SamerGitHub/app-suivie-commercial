@@ -15,17 +15,21 @@ public class TypeEngin {
     private String type;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.EAGER,
-            //cascade = CascadeType.REMOVE,
-            //  cascade = CascadeType.REMOVE,orphanRemoval = true,
-            mappedBy = "typeEngin")
-    private Collection<Engin> engins;
+    @OneToMany(mappedBy = "typeEngin")
+    private Collection<Marque> marques;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private ClassEngin clasEngin;
 
+
+
     public TypeEngin(String type) {
         this.type=type;
+    }
+
+    public TypeEngin(String type, ClassEngin clasEngin) {
+        this.type = type;
+        this.clasEngin = clasEngin;
     }
 
     public TypeEngin() {
@@ -47,13 +51,6 @@ public class TypeEngin {
         this.type = type;
     }
 
-    public Collection<Engin> getEngins() {
-        return engins;
-    }
-
-    public void setEngins(Collection<Engin> engins) {
-        this.engins = engins;
-    }
 
     public ClassEngin getClasEngin() {
         return clasEngin;

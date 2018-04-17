@@ -19,8 +19,6 @@ public class Engin {
 
     @Column(unique = true,nullable = false)
     private String matricule;
-    private String marque;
-    private String modele;
     private String status;
 
     @JsonIgnore
@@ -49,14 +47,15 @@ public class Engin {
 
     @ManyToOne(fetch = FetchType.EAGER)
     //@JoinColumn(name = "localisation_id", nullable = false)
-    private TypeEngin typeEngin;
+    private Modele modele;
 
-    public TypeEngin getTypeEngin() {
-        return typeEngin;
+    public Engin() {
+
     }
 
-    public void setTypeEngin(TypeEngin typeEngin) {
-        this.typeEngin = typeEngin;
+    public Engin(String matricule, String status) {
+        this.matricule = matricule;
+        this.status = status;
     }
 
     public Collection<Assurance> getAssurances() {
@@ -107,18 +106,8 @@ public class Engin {
         this.carburants = carburants;
     }
 
-    public Engin() {
-
-    }
-
-    public Engin(String matricule, String marque, String modele, String status) {
-        this.matricule = matricule;
-        this.marque = marque;
-        this.modele = modele;
-        this.status = status;
 
 
-    }
 
     public Localisation getLocalisation() {
         return localisation;
@@ -146,19 +135,11 @@ public class Engin {
         this.matricule = matricule;
     }
 
-    public String getMarque() {
-        return marque;
-    }
-
-    public void setMarque(String marque) {
-        this.marque = marque;
-    }
-
-    public String getModele() {
+    public Modele getModele() {
         return modele;
     }
 
-    public void setModele(String modele) {
+    public void setModele(Modele modele) {
         this.modele = modele;
     }
 

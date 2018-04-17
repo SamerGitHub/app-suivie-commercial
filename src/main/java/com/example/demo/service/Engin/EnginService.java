@@ -45,7 +45,7 @@ if(e!=null){
 
 }
 System.out.println("after exep");
-        engin.setLocalisation(localisationRepository.save(new Localisation(0f, 0f)));
+        engin.setLocalisation(localisationRepository.save(engin.getLocalisation()));
         enginRepository.save(engin);
 
 /*
@@ -75,13 +75,13 @@ System.out.println("after exep");
         Engin e=enginRepository.getEnginById(engin.getId());
         if(e!=null)
         {
-            if(engin.getTypeEngin()==null)
+            if(engin.getModele()==null)
 
-                throw new RuntimeException("typeEngin Not found in body");
+                throw new RuntimeException("model Not found in body");
 
 
-                if (engin.getTypeEngin().getId() == null)
-                    throw new RuntimeException("typeEngin.id Not found in body");
+                if (engin.getModele().getId() == null)
+                    throw new RuntimeException("modele.id Not found in body");
 
             engin.setLocalisation(e.getLocalisation());
             enginRepository.save(engin);

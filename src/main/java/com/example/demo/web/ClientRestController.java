@@ -35,7 +35,7 @@ public class ClientRestController {
         clientService.addClient(client);
     }
 
-    @PutMapping("/client/{id}")
+    @PutMapping("/client")
     public void updateClient(@RequestBody Client client)
     {
         clientService.updateClient(client);
