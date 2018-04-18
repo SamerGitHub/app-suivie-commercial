@@ -1,7 +1,7 @@
-package com.example.demo.web;
+package com.example.demo.web.tache;
 
-import com.example.demo.entities.Task;
-import com.example.demo.service.TaskService;
+import com.example.demo.entities.tache.Task;
+import com.example.demo.service.tache.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

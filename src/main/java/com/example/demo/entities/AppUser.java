@@ -3,15 +3,12 @@ package com.example.demo.entities;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 
@@ -25,12 +22,27 @@ public class AppUser {
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<AppRole> roles = new ArrayList<>();
 
+
+  // @LazyCollection(LazyCollectionOption.FALSE)
+   @JsonIgnore
+   @OneToMany(//fetch = FetchType.EAGER,
+           cascade = CascadeType.REMOVE,
+            mappedBy = "user")
+    private Collection<Commande> commandes;;
+
     public AppUser() {
 
         // TODO Auto-generated constructor stub
     }
 
 
+    public Collection<Commande> getCommandes() {
+        return commandes;
+    }
+
+    public void setCommandes(Collection<Commande> commandes) {
+        this.commandes = commandes;
+    }
 
     public Long getId() {
         return id;

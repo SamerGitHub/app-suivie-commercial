@@ -1,24 +1,37 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Date;
 
 @Entity
 public class Chantier {
     @Id
     @GeneratedValue
     private Long id;
+    @Column(unique = true)
+    private String titre;
     private String adresse;
 
     private String description;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @Temporal(TemporalType.DATE)
+    @CreatedDate
+    private Date createdDate;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private Client client;
 
     @OneToOne(fetch = FetchType.EAGER)
     private Localisation localisation;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "chantier")
+    private Collection<Commande> commandes;
     public Chantier() {
 
     }
@@ -26,6 +39,30 @@ public class Chantier {
     public Chantier(String adresse, String description) {
         this.adresse = adresse;
         this.description = description;
+    }
+
+    public Collection<Commande> getCommandes() {
+        return commandes;
+    }
+
+    public void setCommandes(Collection<Commande> commandes) {
+        this.commandes = commandes;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public Long getId() {

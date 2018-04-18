@@ -1,7 +1,7 @@
 package com.example.demo.dao;
 
 
-import com.example.demo.entities.Task;
+import com.example.demo.entities.tache.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.stereotype.Repository;

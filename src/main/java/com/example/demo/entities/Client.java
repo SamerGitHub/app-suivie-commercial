@@ -3,6 +3,7 @@ package com.example.demo.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class Client {
@@ -11,10 +12,11 @@ public class Client {
     private Long id;
     private String nom,prenom,tel,email,adresse;
 
-    @OneToOne(fetch = FetchType.EAGER,
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER,
             //cascade = CascadeType.ALL,
             mappedBy = "client")
-    private Chantier chantier;
+    private Collection<Chantier> chantiers;
 
     public Client(String nom, String prenom, String tel, String email, String adresse) {
         this.nom = nom;
@@ -83,12 +85,11 @@ public class Client {
         this.adresse = adresse;
     }
 
-    @JsonIgnore
-    public Chantier getChantier() {
-        return chantier;
+    public Collection<Chantier> getChantiers() {
+        return chantiers;
     }
 
-    public void setChantier(Chantier chantier) {
-        this.chantier = chantier;
+    public void setChantiers(Collection<Chantier> chantiers) {
+        this.chantiers = chantiers;
     }
 }

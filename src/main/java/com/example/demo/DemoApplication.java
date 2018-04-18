@@ -1,11 +1,13 @@
 package com.example.demo;
 
-import com.example.demo.dao.ClientRepository;
+import com.example.demo.dao.*;
 import com.example.demo.dao.Engin.*;
-import com.example.demo.dao.LocalisationRepository;
-import com.example.demo.dao.TaskRepository;
+import com.example.demo.dao.tache.LivraisonRepository;
+import com.example.demo.dao.tache.RemblaimentRepository;
 import com.example.demo.entities.*;
 import com.example.demo.entities.Engin.*;
+import com.example.demo.entities.tache.Livraison;
+import com.example.demo.entities.tache.Task;
 import com.example.demo.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,13 +16,24 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.stream.Stream;
 //firas
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
+    @Autowired
+    private ProduitRepository produitRepository;
+    @Autowired
+    private CommandeRepository commandeRepository;
+    @Autowired
+    private LigneCommandeRepository ligneCommandeRepository;
+    @Autowired
+    private TaskRepository taskRepository;
+    @Autowired
+    private LivraisonRepository livraisonRepository;
+    @Autowired
+    private RemblaimentRepository remblaimentRepository;
     @Autowired
     private PieceRepository pieceRepository;
     @Autowired
@@ -48,8 +61,6 @@ public class DemoApplication implements CommandLineRunner {
     @Autowired
     private ClassEnginRepository classEnginRepository;
     @Autowired
-    private TaskRepository taskRepository;
-    @Autowired
     private AccountService accountService;
 
     public static void main(String[] args) {
@@ -59,14 +70,16 @@ public class DemoApplication implements CommandLineRunner {
     @Override
     public void run(String... arg0) throws Exception {
 
+        /*
         Stream.of("t1", "t2", "t3").forEach(t -> {
-            taskRepository.save(new Task(null, t));
+            taskRepository.save(new Task(null, t) {
+            });
         });
 
         taskRepository.findAll().forEach(t -> {
             System.out.println(t.getTaskName());
 
-        });
+        });*/
         accountService.saveUser(new AppUser(null, "admin", "1234", null));
         accountService.saveUser(new AppUser(null, "user", "1234", null));
         accountService.saveUser(new AppUser(null, "slim", "1234", null));
@@ -295,7 +308,12 @@ public class DemoApplication implements CommandLineRunner {
         clientRepository.save(cl1);clientRepository.save(cl2);clientRepository.save(cl3);
 
 
+        Produit produit1=produitRepository.save(new Produit("Sable"));
+        Produit produit2=produitRepository.save(new Produit("Gravier_12/20"));
+        Produit produit3=produitRepository.save(new Produit("Gravier_25/40"));
+        Produit produit4=produitRepository.save(new Produit("Gravier_3/5"));
 
+        Task task1=livraisonRepository.save(new Livraison("per1",new Date(),new Date(),"tasknName1","camion",true,2f,produit1));
 
 /*
         enginRepository.deleteById(e1.getId());
