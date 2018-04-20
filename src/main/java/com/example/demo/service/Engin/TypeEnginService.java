@@ -13,12 +13,38 @@ public class TypeEnginService {
     @Autowired
     private TypeEnginRepository typeEnginRepository;
 
+
+    public List<TypeEngin> getAllTypeEnginByTaskType(String taskType)
+    {
+
+        if(taskType.equals("Livraison"))
+
+        return typeEnginRepository.findAllByClasEnginClassification("Engins de transports");
+
+        else if (taskType.equals("creuseEtFondation"))
+        {
+            return typeEnginRepository.findAllByClasEnginClassification("Engins de chargements");
+        }
+        return  null;
+    }
+
+
+
+
+
     public List<TypeEngin> getAllTypeEnginByidClassEngin(Long id)
     {
 
         return typeEnginRepository.findAllByClasEnginId(id);
 
     }
+
+
+
+
+
+
+
 
     public List<TypeEngin> getAllTypeEngin()
     {

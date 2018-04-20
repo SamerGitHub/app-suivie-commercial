@@ -33,7 +33,9 @@ public class ChantierService {
 
     public void addChantier(Chantier chantier) {
 
-        chantier.setLocalisation(localisationRepository.save(chantier.getLocalisation()));
+        chantier.setId(null);
+        chantier.getLocalisation().setId(null);
+
         chantier.setCreatedDate(new Date());
         chantierRepository.save(chantier);
 
@@ -41,9 +43,9 @@ public class ChantierService {
 
     public void updateChantier(Chantier chantier) {
 
-
-        chantierRepository.save(chantier);
-
+         if(chantier.getId()!=null && chantier.getLocalisation().getId()!=null)
+         chantierRepository.save(chantier);
+          else throw new RuntimeException("verifiez idChantier et idLocalisation");
     }
 
     public void deleteChantier(Long id) {

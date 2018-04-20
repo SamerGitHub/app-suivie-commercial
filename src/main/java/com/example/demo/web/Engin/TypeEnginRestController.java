@@ -22,13 +22,20 @@ public class TypeEnginRestController {
 
     }
 
+    @GetMapping("/typeEngin/tache/{type}")
+    public List<TypeEngin> getAllTypeEnginByTaskType(@PathVariable String type)
+    {
+        return typeEnginService.getAllTypeEnginByTaskType(type);
+
+    }
+
+
     @GetMapping("/typeEngin")
     public List<TypeEngin> getAllTypeEngin()
     {
         return typeEnginService.getAllTypeEngin();
 
     }
-
 
     @GetMapping("/typeEngin/{id}")
     public TypeEngin getTypeEngin(@PathVariable Long id)

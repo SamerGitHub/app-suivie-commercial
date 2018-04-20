@@ -1,5 +1,6 @@
 package com.example.demo.entities.Engin;
 
+import com.example.demo.entities.tache.Task;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -21,7 +22,25 @@ public class TypeEngin {
     @ManyToOne(fetch = FetchType.EAGER)
     private ClassEngin clasEngin;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "typeEngin")
+    private Collection<Task> tasks;
 
+    public Collection<Marque> getMarques() {
+        return marques;
+    }
+
+    public void setMarques(Collection<Marque> marques) {
+        this.marques = marques;
+    }
+
+    public Collection<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Collection<Task> tasks) {
+        this.tasks = tasks;
+    }
 
     public TypeEngin(String type) {
         this.type=type;

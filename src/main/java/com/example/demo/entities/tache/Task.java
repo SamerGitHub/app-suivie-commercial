@@ -1,5 +1,6 @@
 package com.example.demo.entities.tache;
 
+import com.example.demo.entities.Engin.TypeEngin;
 import com.example.demo.entities.LigneCommande;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
@@ -18,6 +19,8 @@ public abstract class Task  {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private TypeEngin typeEngin;
 
     private String status;
 
@@ -27,7 +30,7 @@ public abstract class Task  {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateFin;
 
-    private String taskName;
+
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER,
@@ -36,19 +39,31 @@ public abstract class Task  {
 
 
 
-    public Task(Long id, String taskName) {
-        this.id=id;
-        this.taskName = taskName;
-    }
+
     public Task() {
 
     }
 
-    public Task(String status, Date dateDeb, Date dateFin, String taskName) {
+    public Task(TypeEngin typeEngin, String status, Date dateDeb, Date dateFin) {
+        this.typeEngin = typeEngin;
         this.status = status;
         this.dateDeb = dateDeb;
         this.dateFin = dateFin;
-        this.taskName = taskName;
+    }
+
+    public TypeEngin getTypeEngin() {
+        return typeEngin;
+    }
+
+    public void setTypeEngin(TypeEngin typeEngin) {
+        this.typeEngin = typeEngin;
+    }
+
+    public Task(String status, Date dateDeb, Date dateFin) {
+        this.status = status;
+        this.dateDeb = dateDeb;
+        this.dateFin = dateFin;
+
     }
 
 
@@ -93,11 +108,5 @@ public abstract class Task  {
         this.id = id;
     }
 
-    public String getTaskName() {
-        return taskName;
-    }
 
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
-    }
 }

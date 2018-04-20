@@ -22,26 +22,27 @@ public class Engin {
     private String status;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "engin")
+    @OneToMany(mappedBy = "engin", cascade = CascadeType.ALL)
     private Collection<Assurance> assurances;
     @JsonIgnore
-    @OneToMany(mappedBy = "engin")
+    @OneToMany(mappedBy = "engin", cascade = CascadeType.ALL)
     private Collection<Reparation> reparations;
     @JsonIgnore
-    @OneToMany(mappedBy = "engin")
+    @OneToMany(mappedBy = "engin", cascade = CascadeType.ALL)
     private Collection<Taxe> taxes;
     @JsonIgnore
-    @OneToMany(mappedBy = "engin")
+    @OneToMany(mappedBy = "engin", cascade = CascadeType.ALL)
     private Collection<Vidange> vidanges;
     @JsonIgnore
-    @OneToMany(mappedBy = "engin")
+    @OneToMany(mappedBy = "engin",cascade = CascadeType.ALL)
     private Collection<Visite> visites;
     @JsonIgnore
-    @OneToMany(mappedBy = "engin")
+    @OneToMany(mappedBy = "engin",cascade = CascadeType.ALL)
     private Collection<Carburant> carburants;
 
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(//fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL)
     //@JoinColumn(name = "localisation_id", nullable = false)
     private Localisation localisation;
 
@@ -56,6 +57,13 @@ public class Engin {
     public Engin(String matricule, String status) {
         this.matricule = matricule;
         this.status = status;
+    }
+
+    public Engin(String matricule, String status, Localisation localisation, Modele modele) {
+        this.matricule = matricule;
+        this.status = status;
+        this.localisation = localisation;
+        this.modele = modele;
     }
 
     public Collection<Assurance> getAssurances() {

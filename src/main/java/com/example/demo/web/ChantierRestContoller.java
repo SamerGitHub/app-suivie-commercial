@@ -35,7 +35,7 @@ public class ChantierRestContoller {
         chantierService.addChantier(chantier);
     }
 
-    @PutMapping("/chantier/{id}")
+    @PutMapping("/chantier")
     public void updateChantier(@RequestBody Chantier chantier)
     {
         chantierService.updateChantier(chantier);

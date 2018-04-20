@@ -13,5 +13,5 @@ import javax.transaction.Transactional;
 
 public interface TaskRepository extends TaskBaseRepository<Task> {
 
-
+        public Task getTaskById(Long id);
 }

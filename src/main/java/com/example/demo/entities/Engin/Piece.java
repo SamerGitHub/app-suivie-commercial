@@ -3,6 +3,7 @@ package com.example.demo.entities.Engin;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class Piece {
@@ -15,8 +16,9 @@ public class Piece {
 
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER)
-    private LigneReparation ligneReparation;
+    @OneToMany(fetch = FetchType.EAGER,
+            mappedBy = "piece")
+    private Collection<LigneReparation> ligneReparations;
 
     public Piece() {
     }
@@ -26,15 +28,13 @@ public class Piece {
         this.description = description;
     }
 
-    public LigneReparation getLigneReparation() {
-        return ligneReparation;
+    public Collection<LigneReparation> getLigneReparations() {
+        return ligneReparations;
     }
 
-    public void setLigneReparation(LigneReparation ligneReparation) {
-        this.ligneReparation = ligneReparation;
+    public void setLigneReparations(Collection<LigneReparation> ligneReparations) {
+        this.ligneReparations = ligneReparations;
     }
-
-
 
     public Long getId() {
         return id;

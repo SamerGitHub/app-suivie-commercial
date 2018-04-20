@@ -39,13 +39,15 @@ public class EnginService {
     }
 
     public void addEngin(Engin engin) {
-Engin e=enginRepository.getEnginByMatricule(engin.getMatricule());
-if(e!=null){
-    throw  new ServerErrorException("engin exite deja");
 
-}
-System.out.println("after exep");
-        engin.setLocalisation(localisationRepository.save(engin.getLocalisation()));
+        Engin e = enginRepository.getEnginByMatricule(engin.getMatricule());
+        if (e != null) {
+            throw new ServerErrorException("engin exite deja");
+
+        }
+        System.out.println("after exep");
+        engin.setId(null);
+        engin.getLocalisation().setId(null);
         enginRepository.save(engin);
 
 /*
@@ -72,23 +74,20 @@ System.out.println("after exep");
     }
 
     public void updateEngin(Engin engin) {
-        Engin e=enginRepository.getEnginById(engin.getId());
-        if(e!=null)
-        {
-            if(engin.getModele()==null)
+        Engin e = enginRepository.getEnginById(engin.getId());
+        if (e != null) {
+            if (engin.getModele() == null)
 
                 throw new RuntimeException("model Not found in body");
 
 
-                if (engin.getModele().getId() == null)
-                    throw new RuntimeException("modele.id Not found in body");
+            if (engin.getModele().getId() == null)
+                throw new RuntimeException("modele.id Not found in body");
 
-            engin.setLocalisation(e.getLocalisation());
+            //  engin.setLocalisation(e.getLocalisation());
             enginRepository.save(engin);
 
-        }
-        else
-        {
+        } else {
             throw new RuntimeException("engin id Not found in BD");
         }
 /*
@@ -113,16 +112,15 @@ System.out.println("after exep");
 */
     }
 
-    public void deleteEngin(Long id){
+    public void deleteEngin(Long id) {
 
 
-          Engin e= enginRepository.getEnginById(id);
-          if(e!=null)
-          {
-              enginRepository.deleteById(id);
-              localisationRepository.delete(e.getLocalisation());
+        Engin e = enginRepository.getEnginById(id);
+        if (e != null) {
+            enginRepository.deleteById(id);
+            localisationRepository.delete(e.getLocalisation());
 
-          }else throw new RuntimeException("Engin not exist");
+        } else throw new RuntimeException("Engin not exist");
 
     }
 

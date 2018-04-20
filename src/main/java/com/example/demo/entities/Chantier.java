@@ -26,14 +26,24 @@ public class Chantier {
     @ManyToOne(fetch = FetchType.EAGER)
     private Client client;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Localisation localisation;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "chantier")
+    @OneToMany(mappedBy = "chantier",
+            cascade = CascadeType.REMOVE)
     private Collection<Commande> commandes;
     public Chantier() {
 
+    }
+
+    public Chantier(String titre, String adresse, String description, Date createdDate, Client client, Localisation localisation) {
+        this.titre = titre;
+        this.adresse = adresse;
+        this.description = description;
+        this.createdDate = createdDate;
+        this.client = client;
+        this.localisation = localisation;
     }
 
     public Chantier(String adresse, String description) {

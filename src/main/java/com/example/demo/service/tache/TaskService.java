@@ -1,7 +1,7 @@
 package com.example.demo.service.tache;
 
 
-import com.example.demo.dao.TaskRepository;
+import com.example.demo.dao.tache.TaskRepository;
 import com.example.demo.entities.tache.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
