@@ -7,9 +7,15 @@ import com.example.demo.entities.AppUser;
 public interface AccountService {
     public AppUser saveUser(AppUser user);
 
+    public AppUser updateUserWithOutCryptPass(AppUser user);
+
+    public AppUser findUserById(Long id);
+
     public AppRole saveRole(AppRole role);
 
     public void addRoleToUser(String username, String roleName);
+
+    public void addRoleToUserId(Long id, String roleName);
 
     public AppUser findUserByUsername(String username);
 

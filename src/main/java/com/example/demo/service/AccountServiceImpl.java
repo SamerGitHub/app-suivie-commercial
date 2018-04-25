@@ -34,6 +34,16 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public AppUser updateUserWithOutCryptPass(AppUser user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public AppUser findUserById(Long id) {
+       return userRepository.getAppUserById(id);
+    }
+
+    @Override
     public AppRole saveRole(AppRole role) {
         // TODO Auto-generated method stub
         return roleRepository.save(role);
@@ -43,6 +53,13 @@ public class AccountServiceImpl implements AccountService {
     public void addRoleToUser(String username, String roleName) {
         AppRole appRole = roleRepository.findRoleByRoleName(roleName);
         AppUser appUser = userRepository.findByUsername(username);
+        appUser.getRoles().add(appRole);
+    }
+
+    @Override
+    public void addRoleToUserId(Long id, String roleName) {
+        AppRole appRole = roleRepository.findRoleByRoleName(roleName);
+        AppUser appUser = userRepository.getAppUserById(id);
         appUser.getRoles().add(appRole);
     }
 

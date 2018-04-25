@@ -11,6 +11,7 @@ public class Client {
     @GeneratedValue
     private Long id;
     private String nom,prenom,tel,email,adresse;
+    private String photo;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER,
@@ -18,18 +19,28 @@ public class Client {
             mappedBy = "client")
     private Collection<Chantier> chantiers;
 
-    public Client(String nom, String prenom, String tel, String email, String adresse) {
+
+
+    public Client(String nom, String prenom, String tel, String email, String adresse,String photo) {
         this.nom = nom;
         this.prenom = prenom;
         this.tel = tel;
         this.email = email;
         this.adresse = adresse;
+        this.photo=photo;
     }
 
     public Client() {
 
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
     public String getEmail() {
         return email;
     }

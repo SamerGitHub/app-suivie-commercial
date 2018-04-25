@@ -16,8 +16,18 @@ public class AppUser {
     @Id
     @GeneratedValue
     private Long id;
+    private String nom;
+    private String prenom;
+
+    @Column(unique = true)
+    private String email;
+
+    @Column(unique = true)
+    private String tel;
+
     @Column(unique = true)
     private String username;
+
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<AppRole> roles = new ArrayList<>();
@@ -35,6 +45,55 @@ public class AppUser {
         // TODO Auto-generated constructor stub
     }
 
+    public AppUser(Long id, String username, String password, Collection<AppRole> roles) {
+
+        this.id = id;
+        this.username = username;
+
+        this.password = password;
+        this.roles = roles;
+    }
+
+    public AppUser(String nom, String prenom, String email, String tel, String username, String password) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.tel = tel;
+        this.username = username;
+        this.password = password;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
 
     public Collection<Commande> getCommandes() {
         return commandes;
@@ -62,8 +121,7 @@ public class AppUser {
 
     //quand on va le recuperer il ignore
 
-   // @JsonIgnore
-
+   @JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -81,13 +139,6 @@ public class AppUser {
         this.roles = roles;
     }
 
-    public AppUser(Long id, String username, String password, Collection<AppRole> roles) {
 
-        this.id = id;
-        this.username = username;
-
-        this.password = password;
-        this.roles = roles;
-    }
 
 }

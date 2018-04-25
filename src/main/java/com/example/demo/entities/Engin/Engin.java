@@ -20,6 +20,7 @@ public class Engin {
     @Column(unique = true,nullable = false)
     private String matricule;
     private String status;
+    private String photo;
 
     @JsonIgnore
     @OneToMany(mappedBy = "engin", cascade = CascadeType.ALL)
@@ -59,11 +60,12 @@ public class Engin {
         this.status = status;
     }
 
-    public Engin(String matricule, String status, Localisation localisation, Modele modele) {
+    public Engin(String matricule, String status,String photo, Localisation localisation, Modele modele) {
         this.matricule = matricule;
         this.status = status;
         this.localisation = localisation;
         this.modele = modele;
+        this.photo=photo;
     }
 
     public Collection<Assurance> getAssurances() {
@@ -159,6 +161,11 @@ public class Engin {
         this.status = status;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
 
-
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 }

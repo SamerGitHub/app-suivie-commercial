@@ -8,14 +8,21 @@ import com.example.demo.dao.LocalisationRepository;
 import com.example.demo.entities.Engin.ClassEngin;
 import com.example.demo.entities.Engin.Engin;
 import com.example.demo.entities.Localisation;
+import com.example.demo.service.StorageService;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ServerErrorException;
 
 import java.util.List;
 
 @Service
 public class EnginService {
+    @Autowired
+    private StorageService storageService;
     @Autowired
     private EnginRepository enginRepository;
     @Autowired
@@ -112,6 +119,25 @@ public class EnginService {
 */
     }
 
+    public ResponseEntity<String> UpdatePhoto(Long id, MultipartFile file)
+    {
+
+        String message = "";
+        try {
+
+            storageService.store(file,"engin");
+            enginRepository.updatePhoto(id,file.getOriginalFilename());
+
+            message = "You successfully uploaded " + file.getOriginalFilename() + "!";
+
+            return ResponseEntity.status(HttpStatus.OK).body(message);
+        } catch (Exception e) {
+            message = "FAIL to upload " + file.getOriginalFilename() + "!";
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(message);
+        }
+
+
+    }
     public void deleteEngin(Long id) {
 
 

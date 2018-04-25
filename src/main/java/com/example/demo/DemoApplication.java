@@ -91,18 +91,22 @@ public class DemoApplication implements CommandLineRunner {
             System.out.println(t.getTaskName());
 
         });*/
-        accountService.saveUser(new AppUser(null, "admin", "1234", null));
-        accountService.saveUser(new AppUser(null, "user", "1234", null));
-        accountService.saveUser(new AppUser(null, "slim", "1234", null));
+
+        accountService.saveUser(new AppUser("hassen","samer","hsensamer88@gmail.com","97885703","samer","1234"));
+        accountService.saveUser(new AppUser("ben abd jalil","achraf","achraf_abd_jalil@gmail.com","95123654","achraf","1234"));
+        accountService.saveUser(new AppUser("eltaief","mohammed","mohammed_eltaif@gmail.com","54156948","mohammed","1234"));
+        accountService.saveUser(new AppUser("kriaa","slim","salem_kriaa@gmail.com","53846179","slim","1234"));
+
 
         accountService.saveRole(new AppRole(null, "ADMIN"));
         accountService.saveRole(new AppRole(null, "USER"));
         accountService.saveRole(new AppRole(null, "CONDUCTEUR"));
         accountService.saveRole(new AppRole(null, "COMMERCIAL"));
+        accountService.saveRole(new AppRole(null, "RESP_DE_PARC"));
 
-        accountService.addRoleToUser("admin", "ADMIN");
-        accountService.addRoleToUser("admin", "USER");
-        accountService.addRoleToUser("user", "USER");
+        accountService.addRoleToUser("samer", "ADMIN");accountService.addRoleToUser("samer", "COMMERCIAL");
+        accountService.addRoleToUser("mohammed", "USER");
+        accountService.addRoleToUser("achraf", "COMMERCIAL");
         accountService.addRoleToUser("slim", "CONDUCTEUR");
 
         // accountService.deleteUser(6l);
@@ -320,10 +324,10 @@ public class DemoApplication implements CommandLineRunner {
         Localisation l4 = new Localisation(35.868934f, 10.585955f);
         Localisation l5 = new Localisation(15.868934f, 15.585955f);
 
-        Engin e1 = enginRepository.save(new Engin("163TU4773", "EnMission", l, mod1));
-        Engin e2 = enginRepository.save(new Engin("101TU9108", "EnPanne", l2, mod2));
-        Engin e3 = enginRepository.save(new Engin("7465", "Disponible", l3, mod3));
-        Engin e4 = enginRepository.save(new Engin("8465", "Disponible", l4, mod4));
+        Engin e1 = enginRepository.save(new Engin("163TU4773", "EnMission","engin1.jpg" ,l, mod1));
+        Engin e2 = enginRepository.save(new Engin("101TU9108", "EnPanne","engin2.jpg", l2, mod2));
+        Engin e3 = enginRepository.save(new Engin("7465", "Disponible","engin3.jpg", l3, mod3));
+        Engin e4 = enginRepository.save(new Engin("8465", "Disponible","engin4.jpg", l4, mod4));
 
 
         Visite v1 = new Visite();
@@ -386,13 +390,17 @@ public class DemoApplication implements CommandLineRunner {
         vidangeRepository.save(new Vidange("vidange boite", "40M60", new Date(), 300f, "aaazeaze"));
 
 
-        Client client1 = new Client("mohammed", "ltaif", "12345678", "sjhjsdhjs@jhjh.com", "kalaa kbira");
-        Client client2 = new Client("achraf", "abdJalil", "789566", "aaaze@jhjh.com", "msaken");
-        Client client3 = new Client("hosni", "qsdqds", "7894546", "aaaze@jhjh.com", "msaken");
+        Client client1 = new Client("mohammed", "ltaif", "22789456", "mohammed_eltaif@gmail.com", "kalaa kbira","mohammed.jpg");
+        Client client2 = new Client("achraf", "abd Jalil", "21456789", "achraf_abd_jalil@gmail.com", "msaken","achraf.jpg");
+        Client client3 = new Client("samer", "hassen", "97885703", "hsensamer88@gmail.com", "hammem sousse","samer.jpg");
+        Client client4 = new Client("adel", "mabrouk", "99456123", "adel_mabrouk@gmail.com", "sahloul 2","adel.jpg");
+
         clientRepository.save(client1);
         clientRepository.save(client2);
         clientRepository.save(client3);
+        clientRepository.save(client4);
 
+       // clientRepository.updatePhoto(client1.getId(),"client.jpg");
 
         Chantier chantier1 = chantierRepository.save(new Chantier("Sahloul4", "rue sahloul 4", "chantier sahloul de mohammed ", new Date(), client1,new Localisation(31.121f, 10.454f)));
         Chantier chantier2 = chantierRepository.save(new Chantier("hammemSousse", "rue yasser arafet", "chantier sahloul de samer ", new Date(), client2, new Localisation(33.121f, 11.454f)));
@@ -423,8 +431,6 @@ public class DemoApplication implements CommandLineRunner {
         enginRepository.deleteById(e2.getId());
         enginRepository.deleteById(e3.getId());
         enginRepository.deleteById(e3.getId())*/
-
-
 
     }
 
