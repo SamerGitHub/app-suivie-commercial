@@ -20,7 +20,12 @@ public class CommandeRestController {
         return commandeService.getAllCommande();
 
     }
+    @GetMapping("/commande/chantier/{id}")
+    public List<Commande> getAllCommandebyChantierId(@PathVariable Long id)
+    {
+        return commandeService.getAllCommandeByChantierId(id);
 
+    }
 
     @GetMapping("/commande/{id}")
     public Commande getCommande(@PathVariable Long id)
@@ -33,6 +38,8 @@ public class CommandeRestController {
     @PostMapping("/commande")
     public void addCommande(@RequestBody Commande commande)
     {
+        System.out.println("addd Commande");
+
         commandeService.addCommande(commande);
     }
 

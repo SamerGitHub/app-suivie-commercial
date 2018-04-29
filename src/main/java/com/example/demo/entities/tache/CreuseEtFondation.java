@@ -10,11 +10,21 @@ public class CreuseEtFondation extends Task {
 
   private Float nbrHeure;
 
-    public CreuseEtFondation() {
-    }
+
 
     public CreuseEtFondation(TypeEngin typeEngin, String status, Date dateDeb, Date dateFin, Float nbrHeure) {
         super(typeEngin, status, dateDeb, dateFin);
+        this.nbrHeure = nbrHeure;
+    }
+
+    public CreuseEtFondation() {
+    }
+
+    public Float getNbrHeure() {
+        return nbrHeure;
+    }
+
+    public void setNbrHeure(Float nbrHeure) {
         this.nbrHeure = nbrHeure;
     }
 }

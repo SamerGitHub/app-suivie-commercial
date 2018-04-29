@@ -21,7 +21,11 @@ public class TypeEnginService {
 
         return typeEnginRepository.findAllByClasEnginClassification("Engins de transports");
 
-        else if (taskType.equals("creuseEtFondation"))
+        else if (taskType.equals("CreuseEtFondation"))
+        {
+            return typeEnginRepository.findAllByClasEnginClassification("Engins de chargements");
+        }
+        else if (taskType.equals("CreuseEtFondation"))
         {
             return typeEnginRepository.findAllByClasEnginClassification("Engins de chargements");
         }

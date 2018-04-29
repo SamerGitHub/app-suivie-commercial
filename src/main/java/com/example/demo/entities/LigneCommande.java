@@ -2,6 +2,7 @@ package com.example.demo.entities;
 
 import com.example.demo.entities.tache.Task;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -17,12 +18,14 @@ public class LigneCommande {
     @ManyToOne(fetch = FetchType.EAGER)
     private Commande commande;
 
-
-    @ManyToOne(fetch = FetchType.EAGER)
+   //@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "id")
+    @ManyToOne(fetch = FetchType.EAGER,
+           cascade = CascadeType.ALL)
     private Task task;
 
 
     public LigneCommande() {
+
     }
 
     public LigneCommande(Commande commande, Task task) {
@@ -52,5 +55,14 @@ public class LigneCommande {
 
     public void setTask(Task task) {
         this.task = task;
+    }
+
+    @Override
+    public String toString() {
+        return "LigneCommande{" +
+                "id=" + id +
+
+                ", task=" + task +
+                '}';
     }
 }

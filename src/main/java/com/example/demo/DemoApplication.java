@@ -413,16 +413,17 @@ public class DemoApplication implements CommandLineRunner {
         Produit produit4 = produitRepository.save(new Produit("Gravier_3/5"));
 
 
-        Commande commande1 = commandeRepository.save(new Commande(accountService.findUserByUsername("admin"), chantier1, "nouveau", new Date()));
+        Commande commande1 = commandeRepository.save(new Commande(accountService.findUserByUsername("samer"), chantier1, "nouveau", new Date()));
+        Commande commande2 = commandeRepository.save(new Commande(accountService.findUserByUsername("achraf"), chantier1, "nouveau", new Date()));
 
-        Task task1 = livraisonRepository.save(new Livraison(teR1, "periorite1", new Date(), new Date(), true, 2f, produit1));
+        /*Task task1 = livraisonRepository.save(new Livraison(teR1, "periorite1", new Date(), new Date(), true, 2f, produit1));
         Task task2 = livraisonRepository.save(new Livraison(teR2, "periotite2", new Date(), new Date(), true, 23f, produit2));
         Task task3 = creuseEtFondationRepository.save(new CreuseEtFondation(teR6, "periorite1", new Date(), new Date(), 5f));
-
-        LigneCommande ligneCommande1 = ligneCommandeRepository.save(new LigneCommande(commande1, task1));
-        LigneCommande ligneCommande2 = ligneCommandeRepository.save(new LigneCommande(commande1, task2));
-        LigneCommande ligneCommande3 = ligneCommandeRepository.save(new LigneCommande(commande1, task3));
-
+*/
+        LigneCommande ligneCommande1 = ligneCommandeRepository.save(new LigneCommande(commande1, new Livraison(teR1, "periorite1", new Date(), new Date(), true, 2f, produit1)));
+       LigneCommande ligneCommande2 = ligneCommandeRepository.save(new LigneCommande(commande1, new Livraison(teR2, "periotite2", new Date(), new Date(), true, 5f, produit2)));
+       LigneCommande ligneCommande3 = ligneCommandeRepository.save(new LigneCommande(commande1, new CreuseEtFondation(teR6, "periorite1", new Date(), new Date(), 5f)));
+      LigneCommande ligneCommande4 = ligneCommandeRepository.save(new LigneCommande(commande1, new CreuseEtFondation(teR5, "periorite3", new Date(), new Date(), 4f)));
         /*e1.setLocalisation(l5);
         enginRepository.save(e1);*/ //dans le cas update il faut envoyer id de la localisation
                                    // sinon une nouvelle localisation va etre créer

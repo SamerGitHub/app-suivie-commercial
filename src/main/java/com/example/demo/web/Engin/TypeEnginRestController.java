@@ -25,6 +25,8 @@ public class TypeEnginRestController {
     @GetMapping("/typeEngin/tache/{type}")
     public List<TypeEngin> getAllTypeEnginByTaskType(@PathVariable String type)
     {
+
+        System.out.println("taskType:::::::"+type);
         return typeEnginService.getAllTypeEnginByTaskType(type);
 
     }

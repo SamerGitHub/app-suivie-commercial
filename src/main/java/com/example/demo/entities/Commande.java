@@ -1,5 +1,7 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.data.annotation.CreatedDate;
@@ -23,6 +25,8 @@ public class Commande {
 
     private String status;
 
+    private String description;
+
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date createdDate;
@@ -44,6 +48,14 @@ public class Commande {
         this.createdDate = createdDate;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Long getId() {
         return id;
     }
@@ -52,10 +64,12 @@ public class Commande {
         this.id = id;
     }
 
+    @JsonGetter
     public AppUser getUser() {
         return user;
     }
 
+    @JsonIgnore
     public void setUser(AppUser user) {
         this.user = user;
     }
@@ -90,6 +104,19 @@ public class Commande {
 
     public void setLigneCommandes(Set<LigneCommande> ligneCommandes) {
         this.ligneCommandes = ligneCommandes;
+    }
+
+    @Override
+    public String toString() {
+        return "Commande{" +
+                "id=" + id +
+                ", user=" + user +
+                ", chantier=" + chantier +
+                ", status='" + status + '\'' +
+                ", description='" + description + '\'' +
+                ", createdDate=" + createdDate +
+                ", ligneCommandes=" + ligneCommandes +
+                '}';
     }
 }
 

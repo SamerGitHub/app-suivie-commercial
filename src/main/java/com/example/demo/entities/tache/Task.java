@@ -2,7 +2,7 @@ package com.example.demo.entities.tache;
 
 import com.example.demo.entities.Engin.TypeEngin;
 import com.example.demo.entities.LigneCommande;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -11,6 +11,16 @@ import java.util.Collection;
 import java.util.Date;
 
 
+
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "task_type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Livraison.class, name = "Livraison"),
+        @JsonSubTypes.Type(value = CreuseEtFondation.class, name = "CreuseEtFondation"),
+        @JsonSubTypes.Type(value = Remblaiment.class, name = "Remblaiment")
+})
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "task_type")
@@ -30,6 +40,8 @@ public abstract class Task  {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateFin;
 
+    @Column(insertable=false,updatable = false)
+    private String task_type;
 
 
     @JsonIgnore
@@ -40,9 +52,7 @@ public abstract class Task  {
 
 
 
-    public Task() {
 
-    }
 
     public Task(TypeEngin typeEngin, String status, Date dateDeb, Date dateFin) {
         this.typeEngin = typeEngin;
@@ -66,6 +76,16 @@ public abstract class Task  {
 
     }
 
+    public Task() {
+    }
+
+    public String getTask_type() {
+        return task_type;
+    }
+
+    public void setTask_type(String task_type) {
+        this.task_type = task_type;
+    }
 
     public Collection<LigneCommande> getLigneCommandes() {
         return ligneCommandes;
@@ -108,5 +128,15 @@ public abstract class Task  {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", typeEngin=" + typeEngin +
+                ", status='" + status + '\'' +
+                ", dateDeb=" + dateDeb +
+                ", dateFin=" + dateFin +
 
+                '}';
+    }
 }
