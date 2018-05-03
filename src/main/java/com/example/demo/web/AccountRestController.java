@@ -5,6 +5,7 @@ import com.example.demo.dao.UserRepository;
 
 import com.example.demo.entities.AppRole;
 import com.example.demo.entities.AppUser;
+import com.example.demo.entities.Engin.TypeEngin;
 import com.example.demo.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -41,7 +42,13 @@ public class AccountRestController {
         AppUser app = accountService.findUserByUsername(form.getUsername());
         if (app != null) throw new RuntimeException("this is already exist");
 
-        if (form.getRoles().size() == 0) throw new RuntimeException("Il faut choisir au mminimum une role");
+        if (form.getRoles()== null ||  form.getRoles().size() == 0) throw new RuntimeException("Il faut choisir au minimum un rôle");
+
+        if(form.isConducteur()) {
+            if(form.getTypeEngins() ==null || form.getTypeEngins().size()==0)  throw new RuntimeException("Il faut choisir au minimum un type engin pour ce conducteur");
+        }
+
+
         AppUser appUser = new AppUser();
 
         appUser.setUsername(form.getUsername());
@@ -51,11 +58,19 @@ public class AccountRestController {
         appUser.setNom(form.getNom());
         appUser.setPrenom(form.getPrenom());
 
-        accountService.saveUser(appUser);
+       AppUser newUser= accountService.saveUser(appUser);
 
         for (AppRole a : form.getRoles()) {
             System.out.println("role: " + a.getRoleName());
             accountService.addRoleToUser(appUser.getUsername(), a.getRoleName());
+        }
+
+        if(form.isConducteur()){
+            for (TypeEngin t : form.getTypeEngins()) {
+                System.out.println("typeEngin: " + t.getType());
+                accountService.addTypeEnginIdToConducteurId(t.getId(),newUser.getId());
+            }
+
         }
 
 
@@ -68,12 +83,14 @@ public class AccountRestController {
 
         if (form.getId() != null && form.getUsername() != null && form.getRoles()!=null) {
 
+            if (form.getRoles().size() == 0) throw new RuntimeException("Il faut choisir au minimum un rôle");
+
             AppUser appUOld = accountService.findUserById(form.getId());
             AppUser app = accountService.findUserByUsername(form.getUsername());
             if (app != null) {
                 if (appUOld.getId() != app.getId()) throw new RuntimeException("this username is for other user");
             }
-            if (form.getRoles().size() == 0) throw new RuntimeException("Il faut choisir au mminimum une role ");
+
 
             if (form.getPassword() != null && form.getRepassword() != null) {
                 if(form.getPassword().equals("")&&form.getRepassword().equals(""))
@@ -85,11 +102,24 @@ public class AccountRestController {
                     appUserNew.setId(form.getId());
 
                     AppUser updatedUser = accountService.updateUserWithOutCryptPass(appUserNew);
+                    if(form.isConducteur()) {
+                        if(form.getTypeEngins() ==null || form.getTypeEngins().size()==0)  throw new RuntimeException("Il faut choisir au minimum un type engin pour ce conducteur");
+
+                        for (TypeEngin t : form.getTypeEngins()) {
+                            System.out.println("typeEngin: " + t.getId() +" user :: "+form.getId());
+                            accountService.addTypeEnginIdToConducteurId(t.getId(),form.getId());
+                        }
+                    }
+
+
 
                     for (AppRole a : form.getRoles()) {
                         System.out.println("role: " + a.getRoleName());
                         accountService.addRoleToUserId(form.getId(), a.getRoleName());
                     }
+
+
+
                     return 1;
                 }else
                 {
@@ -103,10 +133,23 @@ public class AccountRestController {
 
                     accountService.saveUser(appUser);
 
+                    if(form.isConducteur()) {
+                        if(form.getTypeEngins() ==null || form.getTypeEngins().size()==0)  throw new RuntimeException("Il faut choisir au minimum un type engin pour ce conducteur");
+
+                        for (TypeEngin t : form.getTypeEngins()) {
+                            System.out.println("typeEngin: " + t.getType());
+                            accountService.addTypeEnginIdToConducteurId(t.getId(),form.getId());
+                        }
+                    }
+
+
                     for (AppRole a : form.getRoles()) {
                         System.out.println("role: " + a.getRoleName());
                         accountService.addRoleToUserId(form.getId(), a.getRoleName());
                     }
+
+
+
                     return 2;
 
                 }

@@ -2,10 +2,12 @@ package com.example.demo.service;
 
 import javax.transaction.Transactional;
 
+import com.example.demo.dao.Engin.TypeEnginRepository;
 import com.example.demo.dao.RoleRepository;
 import com.example.demo.dao.UserRepository;
 import com.example.demo.entities.AppRole;
 import com.example.demo.entities.AppUser;
+import com.example.demo.entities.Engin.TypeEngin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,8 @@ public class AccountServiceImpl implements AccountService {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private TypeEnginRepository typeEnginRepository;
 
     @Override
     public AppUser saveUser(AppUser user) {
@@ -73,5 +77,31 @@ public class AccountServiceImpl implements AccountService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+
+    @Override
+    public void addTypeEnginIdToConducteurId(Long idTypeEngin, Long idConducteur) {
+        TypeEngin typeEngin1 = typeEnginRepository.getTypeEnginById(idTypeEngin);
+        AppUser appUser = userRepository.getAppUserById(idConducteur);
+
+        System.out.println("Useeeeeeeeeeeeeeeeer :"+appUser.getId());
+
+        appUser.getTypeEngins().add(typeEngin1);
+    }
+
+    @Override
+    public void addTypeEnginToConducteur(String username, String typeEngin) {
+        TypeEngin typeEngin1 = typeEnginRepository.findTypeEnginByType(typeEngin);
+        AppUser appUser = userRepository.findByUsername(username);
+        appUser.getTypeEngins().add(typeEngin1);
+    }
+
+    @Override
+    public void addTypeEnginToConducteurId(Long id, String typeEngin) {
+        TypeEngin typeEngin1 = typeEnginRepository.findTypeEnginByType(typeEngin);
+        AppUser appUser = userRepository.getAppUserById(id);
+        appUser.getTypeEngins().add(typeEngin1);
+    }
+
+
 
 }

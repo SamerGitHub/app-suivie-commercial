@@ -2,6 +2,7 @@ package com.example.demo.web;
 
 
 import com.example.demo.entities.AppRole;
+import com.example.demo.entities.Engin.TypeEngin;
 
 import java.util.Collection;
 
@@ -19,6 +20,16 @@ public class RegisterForm {
     private String nom,prenom,tel,email;
 
     private Collection<AppRole> roles;
+
+    private Collection<TypeEngin> typeEngins;
+
+    public Collection<TypeEngin> getTypeEngins() {
+        return typeEngins;
+    }
+
+    public void setTypeEngins(Collection<TypeEngin> typeEngins) {
+        this.typeEngins = typeEngins;
+    }
 
     public Collection<AppRole> getRoles() {
         return roles;
@@ -101,5 +112,20 @@ public class RegisterForm {
                 ", repassword='" + repassword + '\'' +
                 ", roles=" + roles +
                 '}';
+    }
+
+
+    public boolean isConducteur()
+    {
+        for (AppRole a : roles) {
+
+            if(a.getRoleName().equals("CONDUCTEUR")){
+                  return true;
+            }
+
+        }
+
+        return false;
+
     }
 }

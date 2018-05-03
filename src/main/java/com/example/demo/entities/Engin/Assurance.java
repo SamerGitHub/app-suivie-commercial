@@ -16,6 +16,8 @@ public class Assurance {
     private Date dateFin;
     private Float prix;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private CompagnieAssurance compagnieAssurance;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Engin engin;
@@ -23,10 +25,20 @@ public class Assurance {
     public Assurance() {
     }
 
-    public Assurance(Date dateDeb, Date dateFin, Float prix) {
+    public Assurance(Date dateDeb, Date dateFin, Float prix,CompagnieAssurance compagnieAssurance) {
         this.dateDeb = dateDeb;
         this.dateFin = dateFin;
         this.prix = prix;
+        this.compagnieAssurance=compagnieAssurance;
+    }
+
+
+    public CompagnieAssurance getCompagnieAssurance() {
+        return compagnieAssurance;
+    }
+
+    public void setCompagnieAssurance(CompagnieAssurance compagnieAssurance) {
+        this.compagnieAssurance = compagnieAssurance;
     }
 
     public Long getId() {

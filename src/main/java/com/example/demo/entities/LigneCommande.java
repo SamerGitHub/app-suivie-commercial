@@ -14,6 +14,8 @@ public class LigneCommande {
     @GeneratedValue
     private Long id;
 
+    private String designation;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     private Commande commande;
@@ -31,6 +33,14 @@ public class LigneCommande {
     public LigneCommande(Commande commande, Task task) {
         this.commande = commande;
         this.task = task;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
     }
 
     public Long getId() {

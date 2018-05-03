@@ -2,9 +2,12 @@ package com.example.demo.entities;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 
+import com.example.demo.entities.Engin.TypeEngin;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import org.hibernate.annotations.LazyCollection;
@@ -31,6 +34,9 @@ public class AppUser {
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<AppRole> roles = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<TypeEngin> typeEngins = new HashSet<TypeEngin>();;
 
 
   // @LazyCollection(LazyCollectionOption.FALSE)
@@ -61,6 +67,15 @@ public class AppUser {
         this.tel = tel;
         this.username = username;
         this.password = password;
+    }
+
+
+    public Set<TypeEngin> getTypeEngins() {
+        return typeEngins;
+    }
+
+    public void setTypeEngins(Set<TypeEngin> typeEngins) {
+        this.typeEngins = typeEngins;
     }
 
     public String getNom() {

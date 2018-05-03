@@ -25,12 +25,13 @@ public class Vidange {
     public Vidange() {
     }
 
-    public Vidange(String type, String huile, Date dateVidange, Float prix, String description) {
+    public Vidange(String type, String huile, Date dateVidange, Float prix, String description,Engin engin) {
         this.type = type;
         this.huile = huile;
         this.dateVidange = dateVidange;
         this.prix = prix;
         this.description = description;
+        this.engin=engin;
     }
 
     public String getType() {

@@ -12,5 +12,6 @@ public interface TypeEnginRepository extends JpaRepository<TypeEngin, Long> {
     public TypeEngin getTypeEnginById(Long id);
     public List<TypeEngin> findAllByClasEnginId (Long id);
     public List<TypeEngin> findAllByClasEnginClassification (String classification);
+    public TypeEngin findTypeEnginByType(String type);
 
 }

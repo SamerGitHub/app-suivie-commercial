@@ -82,9 +82,28 @@ public class CommandeService {
     }
 
     public void updateCommande(Commande commande) {
+System.out.println("IdCommande ::  "+commande.getId());
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String loggedUsername = auth.getName();
+        System.out.println("logged Username ::: "+loggedUsername);
+        AppUser use2r = userdao.findByUsername(loggedUsername);
+        if(use2r!=null) System.out.println("user  :::"+use2r.getPrenom() );
+        commande.setUser(use2r);
+        commande.setCreatedDate(new Date());
+        //commande.setId(null);
+        Commande c=commandeRepository.save(commande);
 
-        commandeRepository.save(commande);
+        for (LigneCommande lc :commande.getLigneCommandes())
+        {
+
+          //  lc.setId(null);
+            lc.setCommande(c);
+
+            //lc.getTask().setId(null);
+            ligneCommandeRepository.save(lc);
+
+        }
 
     }
 

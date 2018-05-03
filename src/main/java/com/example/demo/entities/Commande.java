@@ -41,11 +41,12 @@ public class Commande {
     public Commande() {
     }
 
-    public Commande(AppUser appUser, Chantier chantier, String status, Date createdDate) {
+    public Commande(AppUser appUser, Chantier chantier, String status, Date createdDate,String description) {
         this.user = appUser;
         this.chantier = chantier;
         this.status = status;
         this.createdDate = createdDate;
+        this.description=description;
     }
 
     public String getDescription() {

@@ -20,4 +20,11 @@ public interface AccountService {
     public AppUser findUserByUsername(String username);
 
     public void deleteUser(Long id);
+
+
+    public void addTypeEnginIdToConducteurId(Long idTypeEngin, Long idConducteur);
+
+    public void addTypeEnginToConducteur(String username, String typeEngin);
+
+    public void addTypeEnginToConducteurId(Long id, String typeEngin);
 }
