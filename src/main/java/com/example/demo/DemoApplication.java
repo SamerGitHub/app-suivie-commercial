@@ -2,15 +2,13 @@ package com.example.demo;
 
 import com.example.demo.dao.*;
 import com.example.demo.dao.Engin.*;
-import com.example.demo.dao.tache.CreuseEtFondationRepository;
-import com.example.demo.dao.tache.LivraisonRepository;
-import com.example.demo.dao.tache.RemblaimentRepository;
-import com.example.demo.dao.tache.TaskRepository;
+import com.example.demo.dao.tache.*;
 import com.example.demo.entities.*;
 import com.example.demo.entities.Engin.*;
 import com.example.demo.entities.tache.CreuseEtFondation;
 import com.example.demo.entities.tache.Livraison;
 import com.example.demo.entities.tache.Task;
+import com.example.demo.entities.tache.TaskType;
 import com.example.demo.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -27,6 +25,8 @@ import java.util.stream.Stream;
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
+    @Autowired
+    private TaskTypeRepository taskTypeRepository;
     @Autowired
     private CompagnieAssuranceRepository compagnieAssuranceRepository;
     @Autowired
@@ -94,6 +94,11 @@ public class DemoApplication implements CommandLineRunner {
 
         });*/
 
+        taskTypeRepository.save(new TaskType("Livraison","Livraison",true));
+        taskTypeRepository.save(new TaskType("CreuseEtFondation","Creuse et fondation",true));
+        taskTypeRepository.save(new TaskType("Location","Location d'engin",false));
+        taskTypeRepository.save(new TaskType("NettoyageTerrain","Nettoyage de terrain",false));
+
         ClassEngin ce1 = classEnginRepository.save(new ClassEngin("Engins de transports"));
         ClassEngin ce2 = classEnginRepository.save(new ClassEngin("Engins de chargements"));
         ClassEngin ce3 = classEnginRepository.save(new ClassEngin("Engins extractions"));
@@ -144,13 +149,13 @@ public class DemoApplication implements CommandLineRunner {
 
 
         accountService.saveRole(new AppRole(null, "ADMIN"));
-        accountService.saveRole(new AppRole(null, "USER"));
+        accountService.saveRole(new AppRole(null, "SECRETAIRE"));
         accountService.saveRole(new AppRole(null, "CONDUCTEUR"));
         accountService.saveRole(new AppRole(null, "COMMERCIAL"));
         accountService.saveRole(new AppRole(null, "RESP_DE_PARC"));
 
         accountService.addRoleToUser("samer", "ADMIN");accountService.addRoleToUser("samer", "COMMERCIAL");
-        accountService.addRoleToUser("mohammed", "USER");
+        accountService.addRoleToUser("mohammed", "SECRETAIRE");
         accountService.addRoleToUser("achraf", "COMMERCIAL");
         accountService.addRoleToUser("slim", "CONDUCTEUR");accountService.addTypeEnginIdToConducteurId(teR1.getId(),user4.getId());
         accountService.addTypeEnginIdToConducteurId(teR2.getId(),user4.getId());

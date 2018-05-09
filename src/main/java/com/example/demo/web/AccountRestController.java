@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.stream.Stream;
@@ -220,6 +221,35 @@ public class AccountRestController {
 
         return userdao.findAll();
     }
+    @CrossOrigin
+    @RequestMapping(value = "/users/secretaire", method = RequestMethod.GET)
 
+    public List<AppUser> getUsersForSecretaire() {
+
+
+        List<AppUser> listU= userdao.findAll();
+        List<AppUser> listS= new ArrayList<>();
+        for (AppUser a :listU )
+        {
+          if(!hasRoleSecOrAdmin(a.getRoles()))
+          {
+              listS.add(a);
+          }
+        }
+        return listS;
+    }
+
+
+    private boolean hasRoleSecOrAdmin(Collection<AppRole> appRoles)
+    {
+        for(AppRole ap : appRoles)
+        {
+            if(ap.getRoleName().equals("ADMIN")||ap.getRoleName().equals("SECRETAIRE")){
+                return true;
+            }
+        }
+        return false;
+
+    }
 
 }

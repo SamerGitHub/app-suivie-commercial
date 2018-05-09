@@ -57,12 +57,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/client/photo/**","/engin/photo/**")
                 .permitAll();
 
-         http.authorizeRequests().antMatchers("/register/**").permitAll(); //meme sans token
-         http.authorizeRequests().antMatchers("/users/**").hasAuthority("ADMIN");
-         http.authorizeRequests().antMatchers("/registerRole/**").hasAuthority("ADMIN");
+      //   http.authorizeRequests().antMatchers("/register/**").permitAll(); //meme sans token
+         http.authorizeRequests().antMatchers("/users/**").hasAnyAuthority("ADMIN","SECRETAIRE");
+         http.authorizeRequests().antMatchers("/registerRole/**").hasAnyAuthority("ADMIN","SECRETAIRE");
+
+        // http.authorizeRequests().antMatchers("/users/**").hasAuthority("SECRETAIRE");
 
 
-       // http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/tasks/**").hasAuthority("USER");
+       //  http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/tasks/**").hasAuthority("USER");
        // http.authorizeRequests().antMatchers("registerRole/**").hasAnyAuthority("ADMIN");
 
         http.authorizeRequests().anyRequest().authenticated();//tout les requete sauf login doivent etre envouyee avec token
