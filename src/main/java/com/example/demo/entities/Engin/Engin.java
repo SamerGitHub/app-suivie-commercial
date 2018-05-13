@@ -3,12 +3,14 @@ package com.example.demo.entities.Engin;
 
 
 
+import com.example.demo.entities.AvoirEnginConducteur;
 import com.example.demo.entities.Localisation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 
@@ -42,6 +44,13 @@ public class Engin {
     private Collection<Carburant> carburants;
 
 
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.REMOVE,
+            mappedBy = "engin")
+    private Set<AvoirEnginConducteur> avoirEnginConducteurs;
+
+
     @OneToOne(//fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
     //@JoinColumn(name = "localisation_id", nullable = false)
@@ -66,6 +75,15 @@ public class Engin {
         this.localisation = localisation;
         this.modele = modele;
         this.photo=photo;
+    }
+
+
+    public Set<AvoirEnginConducteur> getAvoirEnginConducteurs() {
+        return avoirEnginConducteurs;
+    }
+
+    public void setAvoirEnginConducteurs(Set<AvoirEnginConducteur> avoirEnginConducteurs) {
+        this.avoirEnginConducteurs = avoirEnginConducteurs;
     }
 
     public Collection<Assurance> getAssurances() {

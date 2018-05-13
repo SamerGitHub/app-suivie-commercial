@@ -7,6 +7,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class LigneCommande {
@@ -15,6 +16,8 @@ public class LigneCommande {
     private Long id;
 
     private String designation;
+
+    private boolean affecter;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
@@ -25,14 +28,28 @@ public class LigneCommande {
            cascade = CascadeType.ALL)
     private Task task;
 
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.REMOVE,
+            mappedBy = "ligneCommande")
+    private Set<AvoirEnginConducteur> avoirEnginConducteurs;
 
     public LigneCommande() {
 
     }
 
-    public LigneCommande(Commande commande, Task task) {
+    public LigneCommande(Commande commande, Task task,boolean affecter) {
         this.commande = commande;
         this.task = task;
+        this.affecter=affecter;
+    }
+
+    public boolean isAffecter() {
+        return affecter;
+    }
+
+    public void setAffecter(boolean affecter) {
+        this.affecter = affecter;
     }
 
     public String getDesignation() {

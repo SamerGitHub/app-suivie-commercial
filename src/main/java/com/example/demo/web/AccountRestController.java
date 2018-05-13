@@ -238,6 +238,25 @@ public class AccountRestController {
         }
         return listS;
     }
+    @CrossOrigin
+    @RequestMapping(value = "/users/conducteur/typeEngin/{type}", method = RequestMethod.GET)
+
+    public List<AppUser> getConducteursBytypeEngin(@PathVariable String type) {
+
+
+        List<AppUser> listU= userdao.findAll();
+        List<AppUser> listS= new ArrayList<>();
+        for (AppUser a :listU )
+        {
+            if(conduire(a.getTypeEngins(),type))
+            {
+                listS.add(a);
+            }
+        }
+        return listS;
+    }
+
+
 
 
     private boolean hasRoleSecOrAdmin(Collection<AppRole> appRoles)
@@ -251,5 +270,20 @@ public class AccountRestController {
         return false;
 
     }
+
+
+    private boolean conduire(Collection<TypeEngin> typeEngins,String typeEngin)
+    {
+        for(TypeEngin te : typeEngins)
+        {
+            if(te.getType().equals(typeEngin)){
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+
 
 }

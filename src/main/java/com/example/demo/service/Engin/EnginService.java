@@ -40,6 +40,12 @@ public class EnginService {
         return enginRepository.findAll();
 
     }
+    public List<Engin> getAllEnginByTypeEngin(String type) {
+
+        return enginRepository.findAllByModeleMarqueTypeEnginType(type);
+
+    }
+
 
     public Engin getEngin(Long id) {
         return enginRepository.getEnginById(id);

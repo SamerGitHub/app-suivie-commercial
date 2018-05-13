@@ -22,6 +22,10 @@ public class EnginRestController {
     @Autowired
     StorageService storageService;
 
+
+
+
+
     @GetMapping("/engin/matricule/{matricule}")
     public Engin getEnginByMatricule(@PathVariable String matricule)
     {
@@ -35,6 +39,13 @@ public class EnginRestController {
     public List<Engin> getAllEngin()
     {
         return enginService.getAllEngin();
+
+    }
+
+    @GetMapping("/engin/typeEngin/{type}")
+    public List<Engin> getAllEnginByTypeEngin(@PathVariable String type)
+    {
+        return enginService.getAllEnginByTypeEngin(type);
 
     }
 

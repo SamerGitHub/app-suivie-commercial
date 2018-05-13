@@ -8,12 +8,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Transactional
 @Repository
 public interface EnginRepository extends JpaRepository<Engin, Long> {
     public Engin getEnginByMatricule(String mat);
     public Engin getEnginById(Long id);
+    public List<Engin> findAllByModeleMarqueTypeEnginType (String type);
+    public List<Engin> findAllByModeleMarqueTypeEnginId (Long id);
 
     @Modifying(clearAutomatically = true)
     @Query("UPDATE Engin e SET e.photo =:image WHERE e.id =:id")

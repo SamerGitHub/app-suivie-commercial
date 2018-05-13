@@ -39,12 +39,24 @@ public class AppUser {
     private Set<TypeEngin> typeEngins = new HashSet<TypeEngin>();;
 
 
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.REMOVE,
+            mappedBy = "conducteur")
+    private Set<AvoirEnginConducteur> avoirEnginConducteursConducteurs;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.REMOVE,
+            mappedBy = "secretaire")
+    private Set<AvoirEnginConducteur> avoirEnginConducteursSecretaires;
+
   // @LazyCollection(LazyCollectionOption.FALSE)
    @JsonIgnore
    @OneToMany(//fetch = FetchType.EAGER,
            cascade = CascadeType.REMOVE,
             mappedBy = "user")
-    private Collection<Commande> commandes;;
+    private Collection<Commande> commandes;
 
     public AppUser() {
 
@@ -69,6 +81,21 @@ public class AppUser {
         this.password = password;
     }
 
+    public Set<AvoirEnginConducteur> getAvoirEnginConducteursConducteurs() {
+        return avoirEnginConducteursConducteurs;
+    }
+
+    public void setAvoirEnginConducteursConducteurs(Set<AvoirEnginConducteur> avoirEnginConducteursConducteurs) {
+        this.avoirEnginConducteursConducteurs = avoirEnginConducteursConducteurs;
+    }
+
+    public Set<AvoirEnginConducteur> getAvoirEnginConducteursSecretaires() {
+        return avoirEnginConducteursSecretaires;
+    }
+
+    public void setAvoirEnginConducteursSecretaires(Set<AvoirEnginConducteur> avoirEnginConducteursSecretaires) {
+        this.avoirEnginConducteursSecretaires = avoirEnginConducteursSecretaires;
+    }
 
     public Set<TypeEngin> getTypeEngins() {
         return typeEngins;
