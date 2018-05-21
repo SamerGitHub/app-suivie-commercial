@@ -27,4 +27,6 @@ public interface AccountService {
     public void addTypeEnginToConducteur(String username, String typeEngin);
 
     public void addTypeEnginToConducteurId(Long id, String typeEngin);
+
+    public void updateDeviceToken(String username,String tokenDevice);
 }

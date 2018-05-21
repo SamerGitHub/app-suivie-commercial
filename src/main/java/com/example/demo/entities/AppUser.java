@@ -32,6 +32,9 @@ public class AppUser {
     private String username;
 
     private String password;
+
+    private String deviceToken;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<AppRole> roles = new ArrayList<>();
 
@@ -79,6 +82,23 @@ public class AppUser {
         this.tel = tel;
         this.username = username;
         this.password = password;
+    }
+
+    public AppUser(String nom, String prenom, String email, String tel, String username, String password,String deviceToken) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.tel = tel;
+        this.username = username;
+        this.password = password;
+        this.deviceToken=deviceToken;
+    }
+    public String getDeviceToken() {
+        return deviceToken;
+    }
+
+    public void setDeviceToken(String deviceToken) {
+        this.deviceToken = deviceToken;
     }
 
     public Set<AvoirEnginConducteur> getAvoirEnginConducteursConducteurs() {

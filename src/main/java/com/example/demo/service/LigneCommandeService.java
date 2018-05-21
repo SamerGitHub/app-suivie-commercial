@@ -40,6 +40,13 @@ public class LigneCommandeService {
 
     }
 
+    public void updateLigneCommandeStatus(LigneCommande ligneCommande) {
+
+        ligneCommandeRepository.updateStatus(ligneCommande.getId(),ligneCommande.getStatus());
+
+    }
+
+
     public void deleteLigneCommande(Long id) {
         ligneCommandeRepository.deleteById(id);
 

@@ -21,9 +21,20 @@ public class AvoirEnginConducteurRestController {
     }
 
 
+    @GetMapping("/avoirEnginConducteur/conducteur/{username}")
+    public List<AvoirEnginConducteur> getAllAvoirEnginConducteurByConducteur(@PathVariable String username)
+    {
+        System.out.println("avoirEnginConducteur/conducteur :: /"+username);
+        return avoirEnginConducteurService.getAllAvoirEnginConducteurByConducteur(username);
+
+    }
+
+
+
     @GetMapping("/avoirEnginConducteur/{id}")
     public AvoirEnginConducteur getAvoirEnginConducteur(@PathVariable Long id)
     {
+
 
         return avoirEnginConducteurService.getAvoirEnginConducteur(id);
 
@@ -56,4 +67,8 @@ public class AvoirEnginConducteurRestController {
     {
         avoirEnginConducteurService.deleteAvoirEnginConducteur(id);
     }
+
+
+
+
 }

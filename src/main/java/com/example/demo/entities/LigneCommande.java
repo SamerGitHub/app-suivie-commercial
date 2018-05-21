@@ -1,14 +1,21 @@
 package com.example.demo.entities;
 
 import com.example.demo.entities.tache.Task;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.Set;
 
+
+
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Entity
 public class LigneCommande {
     @Id
@@ -17,9 +24,9 @@ public class LigneCommande {
 
     private String designation;
 
-    private boolean affecter;
+    private String status;
 
-    @JsonIgnore
+ //   @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     private Commande commande;
 
@@ -34,22 +41,44 @@ public class LigneCommande {
             mappedBy = "ligneCommande")
     private Set<AvoirEnginConducteur> avoirEnginConducteurs;
 
+
+  //  @Column(insertable=false,updatable = false)
+   @Transient
+    private AvoirEnginConducteur avoirEnginConducteur;
+
     public LigneCommande() {
 
     }
 
-    public LigneCommande(Commande commande, Task task,boolean affecter) {
+    public Set<AvoirEnginConducteur> getAvoirEnginConducteurs() {
+        return avoirEnginConducteurs;
+    }
+
+    public void setAvoirEnginConducteurs(Set<AvoirEnginConducteur> avoirEnginConducteurs) {
+        this.avoirEnginConducteurs = avoirEnginConducteurs;
+    }
+
+    public AvoirEnginConducteur getAvoirEnginConducteur() {
+        return avoirEnginConducteur;
+    }
+
+    public void setAvoirEnginConducteur(AvoirEnginConducteur avoirEnginConducteur) {
+        this.avoirEnginConducteur = avoirEnginConducteur;
+    }
+
+    public LigneCommande(Commande commande, Task task, String status ,String designation) {
         this.commande = commande;
         this.task = task;
-        this.affecter=affecter;
+        this.status=status;
+        this.designation=designation;
     }
 
-    public boolean isAffecter() {
-        return affecter;
+    public String getStatus() {
+        return status;
     }
 
-    public void setAffecter(boolean affecter) {
-        this.affecter = affecter;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getDesignation() {

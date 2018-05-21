@@ -1,9 +1,11 @@
 package com.example.demo.service;
 
+import com.example.demo.dao.AvoirEnginConducteurRepository;
 import com.example.demo.dao.CommandeRepository;
 import com.example.demo.dao.LigneCommandeRepository;
 import com.example.demo.dao.UserRepository;
 import com.example.demo.entities.AppUser;
+import com.example.demo.entities.AvoirEnginConducteur;
 import com.example.demo.entities.Commande;
 import com.example.demo.entities.Engin.TypeEngin;
 import com.example.demo.entities.LigneCommande;
@@ -20,28 +22,28 @@ import java.util.List;
 public class CommandeService {
 
     @Autowired
-    UserRepository userdao;
+    private AvoirEnginConducteurRepository avoirEnginConducteurRepository;
+    @Autowired
+    private UserRepository userdao;
     @Autowired
     private LigneCommandeRepository ligneCommandeRepository;
     @Autowired
     private CommandeRepository commandeRepository;
 
-    public List<Commande> getAllCommande()
-    {
+    public List<Commande> getAllCommande() {
 
         return commandeRepository.findAll();
 
     }
-    public List<Commande>  getAllCommandeByChantierId(Long id)
-    {
+
+    public List<Commande> getAllCommandeByChantierId(Long id) {
 
         return commandeRepository.getCommandeByChantierId(id);
 
     }
 
 
-    public Commande getCommande(Long id)
-    {
+    public Commande getCommande(Long id) {
         return commandeRepository.getCommandeById(id);
     }
 
@@ -50,20 +52,27 @@ public class CommandeService {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String loggedUsername = auth.getName();
-        System.out.println("logged Username ::: "+loggedUsername);
+        System.out.println("logged Username ::: " + loggedUsername);
         AppUser use2r = userdao.findByUsername(loggedUsername);
-         if(use2r!=null) System.out.println("user  :::"+use2r.getPrenom() );
+        if (use2r != null) System.out.println("user  :::" + use2r.getPrenom());
         commande.setUser(use2r);
         commande.setCreatedDate(new Date());
         commande.setId(null);
-        Commande c=commandeRepository.save(commande);
-        for (LigneCommande lc :commande.getLigneCommandes())
-        {
+        Commande c = commandeRepository.save(commande);
+        for (LigneCommande lc : commande.getLigneCommandes()) {
 
             lc.setId(null);
             lc.setCommande(c);
             lc.getTask().setId(null);
-            ligneCommandeRepository.save(lc);
+            LigneCommande ligneCommande=ligneCommandeRepository.save(lc);
+            if (lc.getStatus()=="affecter") {
+
+                lc.getAvoirEnginConducteur().setLigneCommande(ligneCommande);
+                lc.getAvoirEnginConducteur().setCreatedDate(new Date());
+                lc.getAvoirEnginConducteur().setSecretaire(use2r);
+                avoirEnginConducteurRepository.save(lc.getAvoirEnginConducteur());
+            }
+
 
         }
 
@@ -82,22 +91,21 @@ public class CommandeService {
     }
 
     public void updateCommande(Commande commande) {
-System.out.println("IdCommande ::  "+commande.getId());
+        System.out.println("IdCommande ::  " + commande.getId());
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String loggedUsername = auth.getName();
-        System.out.println("logged Username ::: "+loggedUsername);
+        System.out.println("logged Username ::: " + loggedUsername);
         AppUser use2r = userdao.findByUsername(loggedUsername);
-        if(use2r!=null) System.out.println("user  :::"+use2r.getPrenom() );
+        if (use2r != null) System.out.println("user  :::" + use2r.getPrenom());
         commande.setUser(use2r);
         commande.setCreatedDate(new Date());
         //commande.setId(null);
-        Commande c=commandeRepository.save(commande);
+        Commande c = commandeRepository.save(commande);
 
-        for (LigneCommande lc :commande.getLigneCommandes())
-        {
+        for (LigneCommande lc : commande.getLigneCommandes()) {
 
-          //  lc.setId(null);
+            //  lc.setId(null);
             lc.setCommande(c);
 
             //lc.getTask().setId(null);

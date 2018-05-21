@@ -28,6 +28,23 @@ public class AccountRestController {
     @Autowired
     AccountService accountService;
 
+
+
+    @PostMapping("/user/update/tokenDevice")
+    public String updateDeviceToken(@RequestBody AppUser appUser) {
+        System.out.println("username ::"+appUser.getUsername());
+        System.out.println("tokenDevice ::"+appUser.getDeviceToken());
+
+
+
+      accountService.updateDeviceToken(appUser.getUsername(),appUser.getDeviceToken());
+
+            return "update succes";
+
+
+    }
+
+
     @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable Long id) {
         System.out.println("id:::::::::::" + id);
@@ -286,4 +303,6 @@ public class AccountRestController {
 
 
 
+
 }
+

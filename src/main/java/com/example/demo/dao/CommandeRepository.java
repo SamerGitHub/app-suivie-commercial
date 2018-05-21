@@ -12,6 +12,7 @@ public interface CommandeRepository  extends JpaRepository<Commande, Long> {
     public Commande getCommandeById(Long id);
     public List<Commande> getCommandeByChantierId(Long id);
 
+
 }
 
 

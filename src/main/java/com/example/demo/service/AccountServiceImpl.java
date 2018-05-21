@@ -102,6 +102,11 @@ public class AccountServiceImpl implements AccountService {
         appUser.getTypeEngins().add(typeEngin1);
     }
 
+    @Override
+    public void updateDeviceToken(String username, String tokenDevice) {
+        userRepository.deleteDeviceToken(tokenDevice);
+        userRepository.updateDeviceToken(userRepository.findByUsername(username).getId(),tokenDevice);
+    }
 
 
 }

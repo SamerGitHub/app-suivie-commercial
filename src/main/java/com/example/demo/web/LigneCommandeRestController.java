@@ -43,6 +43,13 @@ public class LigneCommandeRestController {
         ligneCommandeService.updateLigneCommande(ligneCommande);
     }
 
+    @PutMapping("/ligneCommande/update/status")
+    public void updateLigneCommandeStatus(@RequestBody LigneCommande ligneCommande)
+    {
+        System.out.println("ligneCommande/update/status");
+        ligneCommandeService.updateLigneCommandeStatus(ligneCommande);
+    }
+
 
     @DeleteMapping("/ligneCommande/{id}")
     public void deleteLigneCommande(@PathVariable Long id)

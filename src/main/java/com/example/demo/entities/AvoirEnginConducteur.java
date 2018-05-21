@@ -31,6 +31,7 @@ public class AvoirEnginConducteur {
     private Date createdDate;
 
 
+
     public AvoirEnginConducteur() {
     }
 
@@ -41,6 +42,8 @@ public class AvoirEnginConducteur {
         this.secretaire = secretaire;
         this.createdDate=createdDate;
     }
+
+
 
     public Long getId() {
         return id;

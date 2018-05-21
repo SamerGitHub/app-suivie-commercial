@@ -148,7 +148,11 @@ public class DemoApplication implements CommandLineRunner {
         AppUser user2= accountService.saveUser(new AppUser("ben abd jalil","achraf","achraf_abd_jalil@gmail.com","95123654","achraf","1234"));
         AppUser user3= accountService.saveUser(new AppUser("eltaief","mohammed","mohammed_eltaif@gmail.com","54156948","mohammed","1234"));
         AppUser user4= accountService.saveUser(new AppUser("arfawi","ali","ali_arfawi@gmail.com","22156348","ali","1234"));
-        AppUser user5= accountService.saveUser(new AppUser("slimani","farhat","farhat_slimani@gmail.com","23486127","farhat","1234"));
+        AppUser user5= accountService.saveUser(new AppUser("slimani","farhat","farhat_slimani@gmail.com","23486127","farhat","1234","dlQ1_pYvCWc:APA91bHCJ_7gZYrStPLMS8PiSahvRm4NYauAAsK1XrN-nYGJBXK-pm_vzjZe7oOk5OuyvIfxEIGfgOxYlDEXG6IG2eN1M951JDWtzw3fB77M33FOsNH1Zsx_RxzXLQ-WblRRHSbZMOcG"));
+        AppUser user6= accountService.saveUser(new AppUser("amar","lotfi","lotfi_amar@gmail.com","98186732","lotfi","1234"));
+        AppUser user7= accountService.saveUser(new AppUser("ben haj","hmed","hmed_ben_haj@gmail.com","98255132","hmed","1234"));
+        AppUser user8= accountService.saveUser(new AppUser("ben hsine","rjab","rjab_ben_hsine@gmail.com","97331472","rjab","1234"));
+        AppUser user9= accountService.saveUser(new AppUser("fekih","abdallah","abdallah_fekih@gmail.com","96662115","abdallah","1234"));
 
 
         accountService.saveRole(new AppRole(null, "ADMIN"));
@@ -163,27 +167,46 @@ public class DemoApplication implements CommandLineRunner {
         accountService.addRoleToUser("ali", "CONDUCTEUR");accountService.addTypeEnginIdToConducteurId(teR6.getId(),user4.getId());
         accountService.addTypeEnginIdToConducteurId(teR2.getId(),user4.getId());
         accountService.addRoleToUser("farhat", "CONDUCTEUR");accountService.addTypeEnginIdToConducteurId(teR3.getId(),user5.getId());
+        accountService.addRoleToUser("lotfi", "RESP_DE_PARC");
+        accountService.addRoleToUser("hmed", "CONDUCTEUR");
+        accountService.addTypeEnginIdToConducteurId(teR3.getId(),user7.getId());
+        accountService.addRoleToUser("rjab", "CONDUCTEUR");
+        accountService.addTypeEnginIdToConducteurId(teR5.getId(),user8.getId());
+        accountService.addTypeEnginIdToConducteurId(teR8.getId(),user8.getId());
 
+        accountService.addRoleToUser("abdallah", "CONDUCTEUR");
+        accountService.addTypeEnginIdToConducteurId(teR2.getId(),user9.getId());
         // accountService.deleteUser(6l);
 
-
-
+       /*  String tokenDevice="d95ND-Zj5Oo:APA91bFrfK-0N4TMDcvo-RnBuM2b_MiV4DV5P6TyblEAoGJQNjxbIhuQyBv1Jklfi01FDnJleZ_bgiAD-d7kgb28OjguqqvVZ-4kztPCNWpML5DO0oHL42QXnID_pyOKNPFN9-V0ZSRx";
+         accountService.updateDeviceToken(user5.getUsername(),tokenDevice);
+       */
 
 //marque Engin Selon le type d'engin
 
         Marque mqCat1 = new Marque("Caterpillar");
         Marque mqCat2 = new Marque("Caterpillar");
         Marque mqCat3 = new Marque("Caterpillar");
+        Marque mqCat4 = new Marque("Caterpillar");
+        Marque mqCat5 = new Marque("Caterpillar");
 
         mqCat1.setTypeEngin(teR6);
         Marque mqR1 = marqueRepository.save(mqCat1);
-        System.out.println("mqr1 ::" + mqR1.getId());
+
         mqCat2.setTypeEngin(teR4);
         Marque mqR2 = marqueRepository.save(mqCat2);
-        System.out.println("mqr2 ::" + mqR2.getId());
+
         mqCat3.setTypeEngin(teR5);
         Marque mqR3 = marqueRepository.save(mqCat3);
-        System.out.println("mqr3 ::" + mqR3.getId());
+
+        mqCat4.setTypeEngin(teR7);
+        Marque mqR44 = marqueRepository.save(mqCat4);
+
+        mqCat5.setTypeEngin(teR8);
+        Marque mqR45 = marqueRepository.save(mqCat5);
+
+
+
         Marque mq2 = new Marque("Hitachi");
 
         mq2.setTypeEngin(te6);
@@ -199,9 +222,9 @@ public class DemoApplication implements CommandLineRunner {
 
         mqVol1.setTypeEngin(teR3);
         Marque mqR7 = marqueRepository.save(mqVol1);
-        mqVol2.setTypeEngin(teR3);
+        mqVol2.setTypeEngin(teR2);
         Marque mqR8 = marqueRepository.save(mqVol2);
-        mqVol3.setTypeEngin(te3);
+        mqVol3.setTypeEngin(te1);
         Marque mqR9 = marqueRepository.save(mqVol3);
 
 
@@ -322,13 +345,21 @@ public class DemoApplication implements CommandLineRunner {
         Modele m17 = new Modele("45E7");
         m17.setMarque(mqR12);
         Modele mod17 = modeleRepository.save(m17);
-        Modele m18 = new Modele("630A");
-        m18.setMarque(mqR13);
+        Modele m18 = new Modele("315D");
+        m18.setMarque(mqR44);
         Modele mod18 = modeleRepository.save(m18);
+
+
+        Modele m42 = new Modele("M315F");
+        m42.setMarque(mqR45);
+        Modele mod19 = modeleRepository.save(m42);
+
+
 
         Modele m19 = modeleRepository.save(new Modele("F150", marqueRepository.save(new Marque("FIAT", te1))));
         Modele m20 = modeleRepository.save(new Modele("F140", marqueRepository.save(new Marque("FIAT", te2))));
         Modele m21 = modeleRepository.save(new Modele("F160", marqueRepository.save(new Marque("FIAT", te3))));
+        Modele m22 = modeleRepository.save(new Modele("MKR", marqueRepository.save(new Marque("ISUZU", te1))));
 
 
         Localisation l = new Localisation(35.894761f, 10.594485f);
@@ -337,10 +368,18 @@ public class DemoApplication implements CommandLineRunner {
         Localisation l4 = new Localisation(35.868934f, 10.585955f);
         Localisation l5 = new Localisation(15.868934f, 15.585955f);
 
-        Engin e1 = enginRepository.save(new Engin("163TU4773", "EnMission","engin1.jpg" ,l, mod1));
-        Engin e2 = enginRepository.save(new Engin("101TU9108", "EnPanne","engin2.jpg", l2, mod2));
-        Engin e3 = enginRepository.save(new Engin("7465", "Disponible","engin3.jpg", l3, mod3));
-        Engin e4 = enginRepository.save(new Engin("113TU6869", "Disponible","engin4.jpg", l4, mod4));
+
+        Engin e1 = enginRepository.save(new Engin("14248", "EnMission","engin1.jpg" ,l, mod10));//ch sur pneu
+        Engin e2 = enginRepository.save(new Engin("24615", "EnPanne","engin2.jpg", l2, mod1)); //ch pellse
+        Engin e3 = enginRepository.save(new Engin("16454", "Disponible","engin3.jpg", l3, mod3));//ch pellse
+        Engin e4 = enginRepository.save(new Engin("113TU6869", "Disponible","engin4.jpg", l4, mod4));//semi
+        Engin e5 = enginRepository.save(new Engin("90TU2842", "Disponible","semi99.jpg", new Localisation(15.868934f, 15.585955f), mod4));//semi
+        Engin e6 = enginRepository.save(new Engin("100TU1238", "Disponible","berlet496182.jpg", new Localisation(15.868934f, 15.585955f), m20));//poidsLourd
+        Engin e7 = enginRepository.save(new Engin("102TU1352", "Disponible","isuzuNKR.jpg", new Localisation(15.868934f, 15.585955f), m22));//camion
+        Engin e8 = enginRepository.save(new Engin("23486", "Disponible","charSurCh.jpg", new Localisation(15.868934f, 15.585955f), mod17));//ch sur chenille
+        Engin e9 = enginRepository.save(new Engin("11477", "Disponible","pelleSurChenille.png", new Localisation(15.868934f, 15.585955f), mod18));//pelle sur chenille
+        Engin e10 = enginRepository.save(new Engin("33488", "Disponible","pelleSurPneu.jpg", new Localisation(15.868934f, 15.585955f), mod19));//pelle sur chenille
+
 
 
         Visite v1 = new Visite();
@@ -415,7 +454,7 @@ public class DemoApplication implements CommandLineRunner {
         clientRepository.save(client3);
         clientRepository.save(client4);
 
-       // clientRepository.updatePhoto(client1.getId(),"client.jpg");
+
 
         Chantier chantier1 = chantierRepository.save(new Chantier("Sahloul4", "rue sahloul 4", "chantier sahloul de mohammed ", new Date(), client1,new Localisation(31.121f, 10.454f)));
         Chantier chantier2 = chantierRepository.save(new Chantier("hammemSousse", "rue yasser arafet", "chantier sahloul de samer ", new Date(), client2, new Localisation(33.121f, 11.454f)));
@@ -427,26 +466,25 @@ public class DemoApplication implements CommandLineRunner {
         Produit produit3 = produitRepository.save(new Produit("Gravier_25/40"));
         Produit produit4 = produitRepository.save(new Produit("Gravier_3/5"));
 
-
         Commande commande1 = commandeRepository.save(new Commande(accountService.findUserByUsername("samer"), chantier1, "confirmer", new Date(),"commande de la part Mr karim"));
        // Commande commande2 = commandeRepository.save(new Commande(accountService.findUserByUsername("achraf"), chantier1, "nouveau", new Date()));
 
-        /*Task task1 = livraisonRepository.save(new Livraison(teR1, "periorite1", new Date(), new Date(), true, 2f, produit1));
+        /* Task task1 = livraisonRepository.save(new Livraison(teR1, "periorite1", new Date(), new Date(), true, 2f, produit1));
         Task task2 = livraisonRepository.save(new Livraison(teR2, "periotite2", new Date(), new Date(), true, 23f, produit2));
         Task task3 = creuseEtFondationRepository.save(new CreuseEtFondation(teR6, "periorite1", new Date(), new Date(), 5f));
-*/
-        LigneCommande ligneCommande1 = ligneCommandeRepository.save(new LigneCommande(commande1, new Livraison(teR3, "Priorite1", new Date(), new Date(), true, 2f, produit1),true));
-        avoirEnginConducteurRepository.save(new AvoirEnginConducteur(ligneCommande1,e4,user4,user3,new Date()));
-       LigneCommande ligneCommande2 = ligneCommandeRepository.save(new LigneCommande(commande1, new Livraison(teR2, "Priorite2", new Date(), new Date(), true, 5f, produit2),false));
-       LigneCommande ligneCommande3 = ligneCommandeRepository.save(new LigneCommande(commande1, new CreuseEtFondation(teR6, "Priorite3", new Date(), new Date(), 5f),true));
-        avoirEnginConducteurRepository.save(new AvoirEnginConducteur(ligneCommande3,e3,user5,user1,new Date()));
-      LigneCommande ligneCommande4 = ligneCommandeRepository.save(new LigneCommande(commande1, new CreuseEtFondation(teR5, "Priorite1", new Date(), new Date(), 4f),false));
+       */
+        LigneCommande ligneCommande1 = ligneCommandeRepository.save(new LigneCommande(commande1, new Livraison(teR3, "Priorite1", new Date(), new Date(), true, 2f, produit1),"affecter","Livraison 2 semi-remorque  sable"));
+        avoirEnginConducteurRepository.save(new AvoirEnginConducteur(ligneCommande1,e4,user5,user3,new Date()));
+       LigneCommande ligneCommande2 = ligneCommandeRepository.save(new LigneCommande(commande1, new Livraison(teR2, "Priorite2", new Date(), new Date(), true, 5f, produit2),"nonAffecter","Livraison 2 poids-lourds  Gravier_12/20"));
+       LigneCommande ligneCommande3 = ligneCommandeRepository.save(new LigneCommande(commande1, new CreuseEtFondation(teR6, "Priorite3", new Date(), new Date(), 5f),"affecter","creuse et fondation 5 heures chargeuse-pelleteuse"));
+        avoirEnginConducteurRepository.save(new AvoirEnginConducteur(ligneCommande3,e3,user4,user1,new Date()));
+      LigneCommande ligneCommande4 = ligneCommandeRepository.save(new LigneCommande(commande1, new CreuseEtFondation(teR5, "Priorite1", new Date(), new Date(), 4f),"nonAffecter","creuse et fondation 4 heures chargeuses sur chenilles"));
 
 
 
         /*e1.setLocalisation(l5);
         enginRepository.save(e1);*/ //dans le cas update il faut envoyer id de la localisation
-                                   // sinon une nouvelle localisation va etre créer
+        // sinon une nouvelle localisation va etre créer
 
            /* enginRepository.deleteById(e1.getId());
         enginRepository.deleteById(e2.getId());
@@ -460,5 +498,8 @@ public class DemoApplication implements CommandLineRunner {
     public BCryptPasswordEncoder getBCPE() {
         return new BCryptPasswordEncoder();
     }
+
+
+
 }
 
