@@ -16,7 +16,11 @@ public class FcmPushTest {
 
     // Method to send Notifications from server to client end.
 
-    public final static String AUTH_KEY_FCM = "AAAA4nxmkag:APA91bH4BV5vO_l3eZIZmXE45_p-ZgJcd7m8HsRTM_bxRw6VJxLhinoa_QVnZVqXG8-JWr_DVm1bjEsEix1MQoSAbJOMok0mNMMqskXs0QFLB42l2ibnKi08UEbF36sbm5nCjW_9GdHn";
+     public final static String AUTH_KEY_FCM = "AAAA4nxmkag:APA91bH4BV5vO_l3eZIZmXE45_p-ZgJcd7m8HsRTM_bxRw6VJxLhinoa_QVnZVqXG8-JWr_DVm1bjEsEix1MQoSAbJOMok0mNMMqskXs0QFLB42l2ibnKi08UEbF36sbm5nCjW_9GdHn";
+
+
+
+
     public final static String API_URL_FCM = "https://fcm.googleapis.com/fcm/send";
 
     // userDeviceIdKey is the device id you will query from your database
@@ -36,17 +40,34 @@ public class FcmPushTest {
         vConnection.setRequestProperty("Authorization", "key=" + authKey);
         vConnection.setRequestProperty("Content-Type", "application/json");
         vConnection.setRequestProperty("project_id", "972749705640");
+
         vConnection.setRequestProperty("Accept", "application/json");
 
         JSONObject json = new JSONObject();
         JSONObject info = new JSONObject();
         JSONObject infoData = new JSONObject();
 
+        /*
         info.put("body","Il y a une Nouvelle mission"); // Notification body
         infoData.put("body",idDemande.toString());
-        //info.put("title", "Demande de course");
+         info.put("title", "Nouvelle mission");
         json.put("notification", info);
         json.put("data",infoData);
+
+*/
+        info.put("body","Il y a une Nouvelle mission"); // Notification body
+        info.put("title", "SamerTitre");
+        info.put("click_action", "localhost:4200/messagerie-etudiant");
+        info.put("icon", "https://scontent.ftun3-1.fna.fbcdn.net/v/t1.0-9/26220261_10210386699976549_9213994041407820937_n.jpg?_nc_cat=0&oh=cc3b47da8a56461a7a64303e0aa089ff&oe=5B911196");
+
+        infoData.put("body",idDemande.toString());
+        //info.put("title", "Demande de course");
+
+        json.put("notification", info);
+        json.put("data",infoData);
+
+
+
 
         System.out.println("***************************************************" + idDemande);
         /*

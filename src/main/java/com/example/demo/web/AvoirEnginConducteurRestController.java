@@ -3,6 +3,7 @@ package com.example.demo.web;
 import com.example.demo.entities.AvoirEnginConducteur;
 import com.example.demo.service.AvoirEnginConducteurService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +26,11 @@ public class AvoirEnginConducteurRestController {
     public List<AvoirEnginConducteur> getAllAvoirEnginConducteurByConducteur(@PathVariable String username)
     {
         System.out.println("avoirEnginConducteur/conducteur :: /"+username);
-        return avoirEnginConducteurService.getAllAvoirEnginConducteurByConducteur(username);
+      //  return avoirEnginConducteurService.getAllAvoirEnginConducteurByConducteur(username);
+
+        return avoirEnginConducteurService.getByConducteurAndLigneCommandeStatusAffecterOrStart(username);
+
+
 
     }
 
@@ -54,6 +59,20 @@ public class AvoirEnginConducteurRestController {
     {
         avoirEnginConducteurService.addAvoirEnginConducteur(avoirEnginConducteur);
     }
+
+
+    @PostMapping("/avoirEnginConducteur/notification")
+    public ResponseEntity<String> addAvoirEnginConducteurNotification(@RequestBody AvoirEnginConducteur avoirEnginConducteur)
+    {
+        return avoirEnginConducteurService.addAvoirEnginConducteurNotification(avoirEnginConducteur);
+    }
+
+    @PutMapping("/avoirEnginConducteur/notification")
+    public ResponseEntity<String> updateAvoirEnginConducteurNotification(@RequestBody AvoirEnginConducteur avoirEnginConducteur)
+    {
+        return avoirEnginConducteurService.updateAvoirEnginConducteurNotification(avoirEnginConducteur);
+    }
+
 
     @PutMapping("/avoirEnginConducteur")
     public void updateAvoirEnginConducteur(@RequestBody AvoirEnginConducteur avoirEnginConducteur)

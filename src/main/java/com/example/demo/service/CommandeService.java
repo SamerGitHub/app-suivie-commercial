@@ -65,7 +65,7 @@ public class CommandeService {
             lc.setCommande(c);
             lc.getTask().setId(null);
             LigneCommande ligneCommande=ligneCommandeRepository.save(lc);
-            if (lc.getStatus()=="affecter") {
+            if (lc.getStatus().equals("affecter")) {
 
                 lc.getAvoirEnginConducteur().setLigneCommande(ligneCommande);
                 lc.getAvoirEnginConducteur().setCreatedDate(new Date());
@@ -91,6 +91,7 @@ public class CommandeService {
     }
 
     public void updateCommande(Commande commande) {
+
         System.out.println("IdCommande ::  " + commande.getId());
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -100,18 +101,28 @@ public class CommandeService {
         if (use2r != null) System.out.println("user  :::" + use2r.getPrenom());
         commande.setUser(use2r);
         commande.setCreatedDate(new Date());
-        //commande.setId(null);
-        Commande c = commandeRepository.save(commande);
+
+
 
         for (LigneCommande lc : commande.getLigneCommandes()) {
 
-            //  lc.setId(null);
-            lc.setCommande(c);
+            if(lc.getId()==-1)
+            {
+                System.out.println("id ligneCommande -1");
+                lc.setId(null);
+            }
+
+            lc.setCommande(commande);
 
             //lc.getTask().setId(null);
-            ligneCommandeRepository.save(lc);
+         ligneCommandeRepository.save(lc);
 
         }
+
+
+
+        Commande c = commandeRepository.save(commande);
+
 
     }
 

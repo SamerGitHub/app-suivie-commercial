@@ -43,10 +43,10 @@ public class LigneCommandeRestController {
         ligneCommandeService.updateLigneCommande(ligneCommande);
     }
 
-    @PutMapping("/ligneCommande/update/status")
+    @PostMapping("/ligneCommande/update/status")
     public void updateLigneCommandeStatus(@RequestBody LigneCommande ligneCommande)
     {
-        System.out.println("ligneCommande/update/status");
+        System.out.println("/ligneCommande/update/status");
         ligneCommandeService.updateLigneCommandeStatus(ligneCommande);
     }
 

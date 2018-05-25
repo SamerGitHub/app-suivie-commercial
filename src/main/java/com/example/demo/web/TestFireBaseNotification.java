@@ -30,5 +30,24 @@ public class TestFireBaseNotification {
 
         return "hello";
     }
+    @GetMapping("/testFirebase/achraf")
+    public String pushNotificationToAchraf()
+    {
+
+
+        List<String>stringList=new ArrayList<>();
+        stringList.add("f7mP1tj0_3U:APA91bHnYjFXJ5UH_U-EXSNGIQq6jhidZFZrgHudYlsIIHN6U5t1d6QYlw_VA955r0DatfHFKah2_AEgbbsiN5ikZpyzWz9DiB9hPVRingxOBtDccg1Iaq9ha7J6MYrjUYluBC_tD5cL");
+        //stringList.add("mohammed");
+        try {
+            String response= FcmPushTest.pushFCMNotification(stringList,123456L);
+            System.out.println("response :: "+response);
+        }
+        catch (Exception ex)
+        {
+            System.out.println("message Exeption : "+ex.getMessage());
+        }
+
+        return "hello";
+    }
 
 }
