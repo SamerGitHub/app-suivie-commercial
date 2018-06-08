@@ -30,7 +30,8 @@ public class AvoirEnginConducteur {
     @CreatedDate
     private Date createdDate;
 
-
+    private Date startDate;
+    private Date finishDate;
 
     public AvoirEnginConducteur() {
     }
@@ -43,7 +44,21 @@ public class AvoirEnginConducteur {
         this.createdDate=createdDate;
     }
 
+    public Date getStartDate() {
+        return startDate;
+    }
 
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getFinishDate() {
+        return finishDate;
+    }
+
+    public void setFinishDate(Date finishDate) {
+        this.finishDate = finishDate;
+    }
 
     public Long getId() {
         return id;
