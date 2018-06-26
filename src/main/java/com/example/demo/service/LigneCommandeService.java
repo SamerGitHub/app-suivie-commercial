@@ -64,4 +64,9 @@ public class LigneCommandeService {
         ligneCommandeRepository.deleteById(id);
 
     }
+
+    public Long selectCountByStatus(String status)
+    {
+        return ligneCommandeRepository.countByStatus(status);
+    }
 }

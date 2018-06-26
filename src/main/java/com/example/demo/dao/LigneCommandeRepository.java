@@ -14,9 +14,12 @@ import javax.transaction.Transactional;
 @Repository
 public interface LigneCommandeRepository  extends JpaRepository<LigneCommande, Long> {
     public LigneCommande getLigneCommandeById(Long id);
+    public Long countByStatus(String statut);
 
     @Modifying(clearAutomatically = true)
     @Query("UPDATE LigneCommande l SET l.status =:status WHERE l.id =:id")
     public void updateStatus(@Param("id")Long id, @Param("status")String status );
+
+
 
 }

@@ -135,7 +135,8 @@ public class FcmPushTest {
         JSONObject info = new JSONObject();
         JSONObject infoData = new JSONObject();
 
-        info.put("body","Il y a une Nouvelle mission"); // Notification body
+        info.put("body","Vous avez une nouvelle mission en attente"); // Notification body
+      //  info.put("icon", "https://scontent.ftun3-1.fna.fbcdn.net/v/t1.0-9/26220261_10210386699976549_9213994041407820937_n.jpg?_nc_cat=0&oh=cc3b47da8a56461a7a64303e0aa089ff&oe=5B911196");
         infoData.put("body",idDemande.toString());
         //info.put("title", "Demande de course");
         json.put("notification", info);

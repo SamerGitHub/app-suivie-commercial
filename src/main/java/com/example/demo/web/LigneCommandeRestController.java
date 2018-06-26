@@ -31,11 +31,23 @@ public class LigneCommandeRestController {
 
     }
 
+    @GetMapping("/ligneCommande/count/{status}")
+    public Long selectCountByStatus(@PathVariable String status)
+    {
+
+        return ligneCommandeService.selectCountByStatus(status);
+
+    }
+
     @PostMapping("/ligneCommande")
     public void addLigneCommande(@RequestBody LigneCommande ligneCommande)
     {
         ligneCommandeService.addLigneCommande(ligneCommande);
     }
+
+
+
+
 
     @PutMapping("/ligneCommande")
     public void updateLigneCommande(@RequestBody LigneCommande ligneCommande)
@@ -56,4 +68,8 @@ public class LigneCommandeRestController {
     {
         ligneCommandeService.deleteLigneCommande(id);
     }
+
+
+
+
 }

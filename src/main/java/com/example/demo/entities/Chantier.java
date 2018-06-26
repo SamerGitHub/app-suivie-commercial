@@ -30,8 +30,9 @@ public class Chantier {
     private Localisation localisation;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "chantier",
-            cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "chantier"
+          //  ,cascade = CascadeType.REMOVE
+            )
     private Collection<Commande> commandes;
     public Chantier() {
 

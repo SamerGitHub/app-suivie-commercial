@@ -56,14 +56,14 @@ public class AccountRestController {
     public AppUser registerwithrole(@RequestBody RegisterForm form) {
         System.out.println(form.toString());
         if (!form.getPassword().equals(form.getRepassword()))
-            throw new RuntimeException("you must confirm password");
+            throw new RuntimeException("Ressaisir votre mot de passe !");
         AppUser app = accountService.findUserByUsername(form.getUsername());
-        if (app != null) throw new RuntimeException("this is already exist");
+        if (app != null) throw new RuntimeException("login existe déja !");
 
         if (form.getRoles()== null ||  form.getRoles().size() == 0) throw new RuntimeException("Il faut choisir au minimum un rôle");
 
         if(form.isConducteur()) {
-            if(form.getTypeEngins() ==null || form.getTypeEngins().size()==0)  throw new RuntimeException("Il faut choisir au minimum un type engin pour ce conducteur");
+            if(form.getTypeEngins() ==null || form.getTypeEngins().size()==0)  throw new RuntimeException("Il faut choisir au minimum un type d'engin pour ce conducteur");
         }
 
 
@@ -106,7 +106,7 @@ public class AccountRestController {
             AppUser appUOld = accountService.findUserById(form.getId());
             AppUser app = accountService.findUserByUsername(form.getUsername());
             if (app != null) {
-                if (appUOld.getId() != app.getId()) throw new RuntimeException("this username is for other user");
+                if (appUOld.getId() != app.getId()) throw new RuntimeException("login est dédié à un autre utilisateur");
             }
 
 
@@ -121,7 +121,7 @@ public class AccountRestController {
 
                     AppUser updatedUser = accountService.updateUserWithOutCryptPass(appUserNew);
                     if(form.isConducteur()) {
-                        if(form.getTypeEngins() ==null || form.getTypeEngins().size()==0)  throw new RuntimeException("Il faut choisir au minimum un type engin pour ce conducteur");
+                        if(form.getTypeEngins() ==null || form.getTypeEngins().size()==0)  throw new RuntimeException("Il faut choisir au minimum un type d'engin pour ce conducteur");
 
                         for (TypeEngin t : form.getTypeEngins()) {
                             System.out.println("typeEngin: " + t.getId() +" user :: "+form.getId());
@@ -144,7 +144,7 @@ public class AccountRestController {
                     System.out.println("password donne");
 
                     if (!form.getPassword().equals(form.getRepassword()))
-                        throw new RuntimeException("you must confirm password");
+                        throw new RuntimeException("Ressaisir votre mot de passe !");
 
                     AppUser appUser = new AppUser(form.getNom(), form.getPrenom(), form.getEmail(), form.getTel(), form.getUsername(), form.getPassword());
                     appUser.setId(form.getId());
@@ -152,7 +152,7 @@ public class AccountRestController {
                     accountService.saveUser(appUser);
 
                     if(form.isConducteur()) {
-                        if(form.getTypeEngins() ==null || form.getTypeEngins().size()==0)  throw new RuntimeException("Il faut choisir au minimum un type engin pour ce conducteur");
+                        if(form.getTypeEngins() ==null || form.getTypeEngins().size()==0)  throw new RuntimeException("Il faut choisir au minimum un type d'engin pour ce conducteur");
 
                         for (TypeEngin t : form.getTypeEngins()) {
                             System.out.println("typeEngin: " + t.getType());
@@ -181,7 +181,7 @@ public class AccountRestController {
 
         }else {
 
-            throw new RuntimeException("Verifiez donner saisie");
+            throw new RuntimeException("Verifiez les donnéé saisie");
         }
 
 
