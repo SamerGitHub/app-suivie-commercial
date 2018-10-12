@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+//test raef
 @Entity
 
 public class AppUser {
